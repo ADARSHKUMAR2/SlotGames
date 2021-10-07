@@ -184,4 +184,31 @@ public class Reel : MonoBehaviour, IReel
     }
 
     #endregion
+
+    public int GetCorrectSlot(int paylinePoint)
+    {
+        var index = 0;
+        if (paylinePoint == 0)
+            index = topSymbolIndex;
+
+        else if (paylinePoint == 1)
+        {
+            index = (topSymbolIndex + 1) % reelStrip.Count;
+            /*if (diff == 1)
+            {
+                index = 0;
+            }
+            else
+            {
+                index = topSymbolIndex + 1;
+            }*/
+        }
+        else
+        {
+            index = (topSymbolIndex + 2) % reelStrip.Count;
+        }
+
+        Debug.Log($"Index - {index}");
+        return index;
+    }
 }

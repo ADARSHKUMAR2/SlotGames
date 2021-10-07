@@ -8,7 +8,7 @@ public class WinsHandler : MonoBehaviour
     [SerializeField] private PaylinesInfo paylinesInfo;
     [SerializeField] private ReelPanel reelPanel;
 
-    private string symbolName;
+    private string prevSymbol;
     private int counter;
     
     public void CalculateWinInfo()
@@ -25,36 +25,42 @@ public class WinsHandler : MonoBehaviour
     public void CheckWin()
     {
         var allPaylines = paylinesInfo._payLines;
-        for (int i = 0; i < allPaylines.Count; i++)
+        for (int i = 0; i < allPaylines.Count; i++) //all payLines
         {
             var payline = allPaylines[i];
             counter = 1;
-            for (int j = 0; j < payline.paylinePoints.Count; j++)
+            for (int j = 0; j < payline.paylinePoints.Count; j++) // specific payLine
             {
-                //get the symbol name from specific reel stored at payline points
+                //get the symbol name from specific reel stored at payLine points
                 //get correct slot index
+                
+                var slotIndex = GetCorrectSlotIndex(payline, j); //payLine and the reel num
+                var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
                 
                 // Debug.Log($"{payline.paylinePoints[j]}");
                 
-                var slotIndex = GetCorrectSlotIndex(payline, j); //payline and the reel num
-                var symbol = reelPanel._allReels[j]._slots[slotIndex].symbolName;
+                // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName}");
 
-                /*if (symbolName == symbol)
+                if (j > 0) //start from 2nd reel or 2nd payLine position
                 {
-                    counter++;        
+                    if (symbolName == prevSymbol)
+                    {
+                        counter++;        
+                    }
+                    else
+                    {
+                        CheckIfWin(counter,i);
+                        counter = 0;
+                        break;
+                    }
                 }
-                else
-                {
-                    CheckIfWin(counter);
-                    break;
-                }
-                symbolName = symbol;*/
                 
-                
-            }
+                prevSymbol = symbolName;
 
-            symbolName = "";
-        }
+            } //specific payLine
+
+            prevSymbol = "";
+        } // all payLines
     }
 
     /// <summary>
@@ -66,14 +72,39 @@ public class WinsHandler : MonoBehaviour
     private int GetCorrectSlotIndex(Payline payline, int j)
     {
         var slotIndex = 0;
-        slotIndex = reelPanel._allReels[j].GetCorrectSlot(j); 
+        slotIndex = reelPanel._allReels[j].GetCorrectSlot(payline.paylinePoints[j]); 
         
         // Debug.Log($"{slotIndex} - slot index");
         return slotIndex;
     }
 
-    private void CheckIfWin(int count)
+    private void CheckIfWin(int count,int payLineNum)
     {
-        // Debug.Log($"{symbolName} - {count}");
+        Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
+        if (count > 2)
+        {
+            Debug.Log($"Win on  {prevSymbol}");
+            DecideWinType(count);
+        }
+        else
+        {
+            Debug.Log($"Sorry!! No Win");
+        }
+    }
+
+    private void DecideWinType(int count)
+    {
+        if (count == 3)
+        {
+            Debug.Log($"3 of a kind");
+        }
+        else if (count == 4)
+        {
+            Debug.Log($"4 of a kind");
+        }
+        else if(count==5)
+        {
+            Debug.Log($"5 of a kind");
+        }
     }
 }

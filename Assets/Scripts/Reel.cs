@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class Reel : MonoBehaviour, IReel
 {
-    public List<Slot> _slots;
+    [SerializeField] private  List<Slot> _slots;
     [Header("Enter SymbolNames")]
-    [SerializeField] private List<string> reelStrip;
+    public List<string> reelStrip;
     [SerializeField] private Symbols _symbols;
 
     [SerializeField] private int _reelNumber;
@@ -21,7 +21,7 @@ public class Reel : MonoBehaviour, IReel
     private Action onBtnInteractionChange;
     private bool isReelStopped;
 
-    public int topSymbolIndex;
+    public int topSymbolIndex; // the index of the symbol which at the top position in slot
     
     private void Start()
     {
@@ -78,6 +78,7 @@ public class Reel : MonoBehaviour, IReel
             curSlotIndex = reelStrip.Count - 1;
         slot.UpdateIndex(curSlotIndex);
         slot._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[curSlotIndex]);
+        slot.SetSymbolName(reelStrip[curSlotIndex]);
     }
 
     private void LerpSlots()
@@ -151,6 +152,7 @@ public class Reel : MonoBehaviour, IReel
 
     public void CheckForCustomPos(int stopPosition, int reelNum,[CanBeNull] Action btnInteraction)
     {
+        isReelStopped = false;
         onBtnInteractionChange = btnInteraction;
         StartCoroutine(CheckStopPos(stopPosition, reelNum));
     }
@@ -187,28 +189,25 @@ public class Reel : MonoBehaviour, IReel
 
     public int GetCorrectSlot(int paylinePoint)
     {
+        // Debug.Log($"Payline points - {paylinePoint}");
         var index = 0;
         if (paylinePoint == 0)
-            index = topSymbolIndex;
-
+        {
+            // Debug.Log($"Case 1 {topSymbolIndex}");
+            index = (topSymbolIndex) % reelStrip.Count;
+        }
         else if (paylinePoint == 1)
         {
+            // Debug.Log($"Case 2 {topSymbolIndex}");
             index = (topSymbolIndex + 1) % reelStrip.Count;
-            /*if (diff == 1)
-            {
-                index = 0;
-            }
-            else
-            {
-                index = topSymbolIndex + 1;
-            }*/
         }
         else
         {
+            // Debug.Log($"Case 3 {topSymbolIndex}");
             index = (topSymbolIndex + 2) % reelStrip.Count;
         }
 
-        Debug.Log($"Index - {index}");
+        // Debug.Log($"<color=magenta>  reel - {_reelNumber} , Index - {index} </color>");
         return index;
     }
 }

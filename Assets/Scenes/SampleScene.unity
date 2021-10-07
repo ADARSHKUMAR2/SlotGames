@@ -188,7 +188,7 @@ MonoBehaviour:
   _reelNumber: 1
   _spinSpeed: 1
   bounceOffset: 1
-  topSymbolIndex: 0
+  topSymbolIndex: 1
 --- !u!1 &67490842
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!1 &79205171
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,13 +344,13 @@ MonoBehaviour:
   - M2
   - M1
   - M2
-  - M1
+  - F2
   - A1
   _symbols: {fileID: 639942847}
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 1
-  topSymbolIndex: 0
+  topSymbolIndex: 1
 --- !u!1 &159391630
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &201322825
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -560,7 +562,7 @@ MonoBehaviour:
   _reelNumber: 4
   _spinSpeed: 1
   bounceOffset: 1
-  topSymbolIndex: 0
+  topSymbolIndex: 1
 --- !u!1 &274771400
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &274771403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -777,6 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &377621615
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -951,6 +955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &497457835
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1047,6 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &514568960
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1226,6 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &523060547
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1602,6 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &656773055
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1698,6 +1706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &660443583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1794,6 +1803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &682038433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1890,6 +1900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &718405240
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2073,6 +2084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &809758931
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2169,6 +2181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &864540989
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2278,7 +2291,7 @@ MonoBehaviour:
   - {fileID: 1415990461}
   - {fileID: 265453021}
   stopPositions: 000000000200000004000000020000000a000000
-  _stopAtSpecificPos: 0
+  _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2461,6 +2474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &960714778
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2556,7 +2570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _payLines:
-  - paylinePoints: 0000000000000000000000000000000000000000
+  - paylinePoints: 0100000001000000010000000000000000000000
+    winAmount: 10
+  - paylinePoints: 0100000001000000010000000100000001000000
     winAmount: 10
 --- !u!1 &1143033679
 GameObject:
@@ -2603,6 +2619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1143033682
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2822,7 +2839,7 @@ MonoBehaviour:
   reelStrip:
   - M1
   - A1
-  - F3
+  - M1
   - M3
   - M2
   - M1
@@ -2831,7 +2848,7 @@ MonoBehaviour:
   _reelNumber: 3
   _spinSpeed: 1
   bounceOffset: 1
-  topSymbolIndex: 0
+  topSymbolIndex: 1
 --- !u!1 &1416149804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,6 +2894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1416149807
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2973,6 +2991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1430356246
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3156,6 +3175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1599443351
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3339,6 +3359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1617275696
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3689,6 +3710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1804865650
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3785,6 +3807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1929564578
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3968,6 +3991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &1991152941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4151,6 +4175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &2031506626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4430,14 +4455,14 @@ MonoBehaviour:
   - M2
   - M5
   - F1
-  - A1
+  - M1
   - F2
   - F3
   _symbols: {fileID: 639942847}
   _reelNumber: 2
   _spinSpeed: 1
   bounceOffset: 1
-  topSymbolIndex: 0
+  topSymbolIndex: 1
 --- !u!1 &2097035910
 GameObject:
   m_ObjectHideFlags: 0
@@ -4483,6 +4508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &2097035913
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4579,6 +4605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  symbolName: 
 --- !u!212 &2101864409
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -39,20 +39,26 @@ public class WinsHandler : MonoBehaviour
                 
                 // Debug.Log($"{payline.paylinePoints[j]}");
                 
-                // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName}");
+                // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");
 
                 if (j > 0) //start from 2nd reel or 2nd payLine position
                 {
                     if (symbolName == prevSymbol)
                     {
+                        Debug.Log($"Same symbol");
                         counter++;        
                     }
                     else
                     {
+                        Debug.Log($"Diff symbol");
                         CheckIfWin(counter,i);
                         counter = 0;
                         break;
                     }
+                    
+                    //In-case if all symbols lie on payLine
+                    if(counter==5)
+                        CheckIfWin(counter,i);
                 }
                 
                 prevSymbol = symbolName;
@@ -83,7 +89,7 @@ public class WinsHandler : MonoBehaviour
         Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
         if (count > 2)
         {
-            Debug.Log($"Win on  {prevSymbol}");
+            // Debug.Log($"Win on  {prevSymbol}");
             DecideWinType(count);
         }
         else
@@ -96,15 +102,15 @@ public class WinsHandler : MonoBehaviour
     {
         if (count == 3)
         {
-            Debug.Log($"3 of a kind");
+            Debug.Log($"3 of a kind {prevSymbol}");
         }
         else if (count == 4)
         {
-            Debug.Log($"4 of a kind");
+            Debug.Log($"4 of a kind {prevSymbol}");
         }
         else if(count==5)
         {
-            Debug.Log($"5 of a kind");
+            Debug.Log($"5 of a kind {prevSymbol}");
         }
     }
 }

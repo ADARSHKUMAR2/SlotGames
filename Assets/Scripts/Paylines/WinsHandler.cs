@@ -57,7 +57,7 @@ public class WinsHandler : MonoBehaviour
                     }
                     
                     //In-case if all symbols lie on payLine
-                    if(counter==5)
+                    if(counter==payline.paylinePoints.Count)
                         CheckIfWin(counter,i);
                 }
                 

@@ -27,5 +27,18 @@ public class SymbolWins
 public class PaytableData : MonoBehaviour
 {
     [SerializeField] private PayTable payTable;
-    
+
+    public void GetWinAmount(string symbolName, int count)
+    {
+        foreach (var allWins in payTable.winsCategory)
+        {
+            if (allWins.symbolName == symbolName)
+            {
+                foreach (var symbolWins in allWins.symbolWinsList)
+                {
+                    Debug.Log($" Wins for {symbolName} - {symbolWins.winAmount} for {symbolWins.winCombo} of a kind");
+                }
+            }
+        }
+    }
 }

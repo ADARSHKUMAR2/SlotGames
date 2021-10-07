@@ -2768,6 +2768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paylinesInfo: {fileID: 997203464}
   reelPanel: {fileID: 868153007}
+  payTable: {fileID: 1817377082}
 --- !u!4 &1228696244
 Transform:
   m_ObjectHideFlags: 0

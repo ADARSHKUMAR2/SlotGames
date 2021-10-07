@@ -7,7 +7,8 @@ public class WinsHandler : MonoBehaviour
 {
     [SerializeField] private PaylinesInfo paylinesInfo;
     [SerializeField] private ReelPanel reelPanel;
-
+    [SerializeField] private PaytableData payTable;
+    
     private string prevSymbol;
     private int counter;
     
@@ -45,12 +46,12 @@ public class WinsHandler : MonoBehaviour
                 {
                     if (symbolName == prevSymbol)
                     {
-                        Debug.Log($"Same symbol");
+                        // Debug.Log($"Same symbol");
                         counter++;        
                     }
                     else
                     {
-                        Debug.Log($"Diff symbol");
+                        // Debug.Log($"Diff symbol");
                         CheckIfWin(counter,i);
                         counter = 0;
                         break;
@@ -112,5 +113,8 @@ public class WinsHandler : MonoBehaviour
         {
             Debug.Log($"5 of a kind {prevSymbol}");
         }
+        
+        // Decide which win to give based on payTable data
+        payTable.GetWinAmount(prevSymbol,count);
     }
 }

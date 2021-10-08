@@ -11,7 +11,13 @@ public class WinsHandler : MonoBehaviour
     
     private string prevSymbol;
     private int counter;
-   
+    private int totalWinAmt;
+    
+    //Contains the list of all payLines on which the player won
+    public List<int> payLineWins; //TODO:Make it private later after testing
+
+    #region LoginWin
+
     public void CheckWin()
     {
         var allPaylines = paylinesInfo._payLines;
@@ -24,10 +30,8 @@ public class WinsHandler : MonoBehaviour
                 //get the symbol name from specific reel stored at payLine points
                 //get correct slot index
                 
-                var slotIndex = GetCorrectSlotIndex(payline, j); //payLine and the reel num
+                var slotIndex = GetSlotIndex(payline, j); //payLine and the reel num
                 var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
-                
-                // Debug.Log($"{payline.paylinePoints[j]}");
                 
                 // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");
 
@@ -38,7 +42,10 @@ public class WinsHandler : MonoBehaviour
             } //specific payLine
 
             prevSymbol = "";
+            
         } // all payLines
+        
+        HighlightPayLines(); //Highlight the payLines
     }
 
     private bool CheckWinFromSecondSymbol(int paylinePoint, string symbolName, int currPayline, Payline payline)
@@ -74,7 +81,7 @@ public class WinsHandler : MonoBehaviour
     /// <param name="payline"></param>
     /// <param name="j"></param>
     /// <returns></returns>
-    private int GetCorrectSlotIndex(Payline payLine, int j)
+    private int GetSlotIndex(Payline payLine, int j)
     {
         var slotIndex = 0;
         slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]); 
@@ -89,17 +96,17 @@ public class WinsHandler : MonoBehaviour
         if (count > 2)
         {
             // Debug.Log($"Win on  {prevSymbol}");
-            DecideWinType(count);
+            payLineWins.Add(payLineNum);
+            CheckWinCombo(count);
         }
         else
-        {
             Debug.Log($"Sorry!! No Win -> Count {count}");
-        }
+        
     }
 
-    private void DecideWinType(int count)
+    private void CheckWinCombo(int count)
     {
-        if (count == 3)
+        /*if (count == 3)
         {
             Debug.Log($"3 of a kind {prevSymbol}");
         }
@@ -107,13 +114,47 @@ public class WinsHandler : MonoBehaviour
         {
             Debug.Log($"4 of a kind {prevSymbol}");
         }
-        else if(count==5)
+        else if(count == 5)
         {
             Debug.Log($"5 of a kind {prevSymbol}");
-        }
+        }*/
         
         // Decide which win to give based on payTable data
         var winAmtGiven = payTable.GetWinAmount(prevSymbol,count);
+        totalWinAmt += winAmtGiven;
         Debug.Log($"<color=white> Win - {winAmtGiven} for {prevSymbol} </color>");
+        
     }
+
+    #endregion
+    
+    #region Representation
+    
+    /// <summary>
+    /// Representation of payLines
+    /// </summary>
+    private void HighlightPayLines()
+    {
+        StartCoroutine(Highlight());
+    }
+
+    private IEnumerator Highlight()
+    {
+        foreach (var payLine in payLineWins)
+        {
+            //Highlight the correct slotIndex of the specific reel
+            var index = paylinesInfo._payLines[payLine].paylinePoints;
+            for (int i = 0; i < index.Count; i++)
+            {
+                Debug.Log($"Points - {index[i]} -> PayLine {payLine}");
+            }
+            yield return new WaitForSeconds(2f);
+        }
+
+        payLineWins.Clear();
+        yield return null;
+    }
+
+    #endregion
+    
 }

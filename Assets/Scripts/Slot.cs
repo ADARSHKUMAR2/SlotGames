@@ -8,9 +8,18 @@ public class Slot : MonoBehaviour
     public string symbolName; //TODO: Make it a property after testing
 
     public SpriteRenderer _symbolImage { private set; get; }
+    private SpriteRenderer highlightImage;
+    
     private void Awake()
     {
         _symbolImage = GetComponent<SpriteRenderer>();
+        highlightImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        ShowHighlight(false);
+    }
+
+    private void ShowHighlight(bool value)
+    {
+        highlightImage.enabled = value;
     }
 
     public void UpdateIndex(int value)

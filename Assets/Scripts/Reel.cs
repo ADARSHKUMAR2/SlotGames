@@ -21,6 +21,7 @@ public class Reel : MonoBehaviour, IReel
     private Action onBtnInteractionChange;
     private bool isReelStopped;
 
+    //TODO: make it a property
     public int topSymbolIndex; // the index of the symbol which at the top position in slot
     
     private void Start()

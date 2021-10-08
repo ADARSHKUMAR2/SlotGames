@@ -271,6 +271,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 514568958}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -421,7 +426,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!114 &67490845
 MonoBehaviour:
@@ -646,7 +651,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &206168204
 PrefabInstance:
@@ -964,7 +969,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &311550661
 PrefabInstance:
@@ -1214,7 +1219,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &400974604
 PrefabInstance:
@@ -1618,7 +1623,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &514568957
 GameObject:
@@ -1716,7 +1721,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &519420028
 GameObject:
@@ -1897,7 +1902,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &593973287
 GameObject:
@@ -2275,7 +2280,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &660443580
 GameObject:
@@ -2373,7 +2378,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &682038430
 GameObject:
@@ -2471,7 +2476,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &718405237
 GameObject:
@@ -2569,7 +2574,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &779237536
 PrefabInstance:
@@ -2760,7 +2765,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &820451813
 PrefabInstance:
@@ -2769,6 +2774,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 660443581}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2933,7 +2943,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &868153005
 GameObject:
@@ -2992,7 +3002,7 @@ MonoBehaviour:
   - {fileID: 2078034021}
   - {fileID: 1415990461}
   - {fileID: 265453021}
-  stopPositions: 040000000100000004000000020000000a000000
+  stopPositions: 040000000300000004000000020000000a000000
   _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
@@ -3302,7 +3312,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &997203462
 GameObject:
@@ -3349,13 +3359,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _payLines:
   - paylinePoints: 0100000001000000010000000000000000000000
-    winAmount: 10
   - paylinePoints: 0100000001000000000000000100000001000000
-    winAmount: 10
-  - paylinePoints: 0200000002000000010000000100000001000000
-    winAmount: 10
+  - paylinePoints: 0000000002000000010000000100000001000000
+  - paylinePoints: 0200000000000000010000000000000000000000
+  - paylinePoints: 0200000002000000020000000000000000000000
+  - paylinePoints: 0200000002000000000000000000000000000000
   - paylinePoints: 0200000002000000010000000000000000000000
-    winAmount: 10
+  - paylinePoints: 0100000002000000010000000000000000000000
 --- !u!1001 &1135225968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3363,6 +3373,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2097035911}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3527,7 +3542,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1144438261
 GameObject:
@@ -3602,6 +3617,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 497457833}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4031,7 +4051,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1430356243
 GameObject:
@@ -4129,7 +4149,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &1471854930
 PrefabInstance:
@@ -4314,7 +4334,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &1609689871
 PrefabInstance:
@@ -4499,7 +4519,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1624295908
 GameObject:
@@ -4837,6 +4857,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1143033680}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4990,6 +5015,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1416149805}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5154,7 +5184,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1817377080
 GameObject:
@@ -5396,7 +5426,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &1944914403
 PrefabInstance:
@@ -5492,6 +5522,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 960714776}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5731,7 +5766,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &1992433362
 PrefabInstance:
@@ -5740,6 +5775,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1599443349}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6066,7 +6106,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &2040056897
 GameObject:
@@ -6400,7 +6440,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &2101864406
 GameObject:
@@ -6498,7 +6538,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1001 &2129640733
 PrefabInstance:
@@ -6582,6 +6622,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1991152939}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6657,6 +6702,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 274771401}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6732,6 +6782,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 67490843}
     m_Modifications:
+    - target: {fileID: 3165473601496106985, guid: 3c49d06cdb6ca0546aa354d78c947f38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3165473601496106986, guid: 3c49d06cdb6ca0546aa354d78c947f38,
         type: 3}
       propertyPath: m_LocalPosition.x

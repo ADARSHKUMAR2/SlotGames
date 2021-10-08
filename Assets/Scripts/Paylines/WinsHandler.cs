@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public class PaylineWinData
 {
+    //TODO: Make these properties
     public int payLineNum;
     public int winAmt;
 }
@@ -152,7 +153,8 @@ public class WinsHandler : MonoBehaviour
     private void HighlightPayLines()
     {
         uiController.UpdateTotalWinAmt(totalWinAmt);
-        winCoroutine = StartCoroutine(Highlight());
+        if (payLineWins.Count > 0)
+            winCoroutine = StartCoroutine(Highlight());
     }
 
     private IEnumerator Highlight()
@@ -173,10 +175,10 @@ public class WinsHandler : MonoBehaviour
             }
             yield return new WaitForSeconds(2f);
             RemoveHighlight();
+            yield return new WaitForSeconds(2f);
         }
 
-        // payLineWins.Clear();
-        HighlightPayLines();
+        HighlightPayLines(); 
         yield return null;
     }
 

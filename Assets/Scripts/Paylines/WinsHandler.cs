@@ -87,38 +87,8 @@ public class WinsHandler : MonoBehaviour
                 {
                     Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
                     //TODO: Check for wild here
-                
-                    if (prevSymbol == "W")
-                    {
-                        //check if the current symbol is the ongoing win symbol (if not null)
-                        if (winSymbol != "")
-                        {
-                            if (winSymbol == currSymbolName)
-                            {
-                                Debug.Log($"Win symbol same as current symbol");
-                                counter++;
-                                // CheckOnWinComplete(currPayline, payline);
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log($"Win symbol is empty");
-                            winSymbol = currSymbolName;
-                            counter++;
-                            // CheckOnWinComplete(currPayline, payline);
-                            return false;
-                        }
-                    }
+                    if (!CheckingForWild(currSymbolName, currPayline, payline)) return false;
 
-                    if (currSymbolName == "W")
-                    {
-                        Debug.Log($"Current symbol is wild");
-                        counter++;
-                        CheckOnWinComplete(currPayline, payline);
-                        return false;
-                    }
-                
                     CheckIfWin(counter, currPayline,winSymbol);
                     counter = 0;
                     return true;
@@ -130,6 +100,42 @@ public class WinsHandler : MonoBehaviour
         }
         
         return false;
+    }
+
+    private bool CheckingForWild(string currSymbolName, int currPayline, Payline payline)
+    {
+        if (prevSymbol == "W")
+        {
+            //check if the current symbol is the ongoing win symbol (if not null)
+            if (winSymbol != "")
+            {
+                if (winSymbol == currSymbolName)
+                {
+                    Debug.Log($"Win symbol same as current symbol");
+                    counter++;
+                    // CheckOnWinComplete(currPayline, payline);
+                    return false;
+                }
+            }
+            else
+            {
+                Debug.Log($"Win symbol is empty");
+                winSymbol = currSymbolName;
+                counter++;
+                // CheckOnWinComplete(currPayline, payline);
+                return false;
+            }
+        }
+
+        if (currSymbolName == "W")
+        {
+            Debug.Log($"Current symbol is wild");
+            counter++;
+            CheckOnWinComplete(currPayline, payline);
+            return false;
+        }
+
+        return true;
     }
 
     private void CheckOnWinComplete(int currPayline, Payline payline)

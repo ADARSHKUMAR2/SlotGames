@@ -86,7 +86,7 @@ public class WinsHandler : MonoBehaviour
                 else
                 {
                     Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
-                    //TODO: Check for wild here
+                    //TODO: Check for wild here.
                     if (!CheckingForWild(currSymbolName, currPayline, payline)) return false;
 
                     CheckIfWin(counter, currPayline,winSymbol);

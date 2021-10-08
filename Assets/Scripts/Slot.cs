@@ -17,7 +17,7 @@ public class Slot : MonoBehaviour
         ShowHighlight(false);
     }
 
-    private void ShowHighlight(bool value)
+    public void ShowHighlight(bool value)
     {
         highlightImage.enabled = value;
     }

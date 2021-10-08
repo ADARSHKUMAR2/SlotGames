@@ -92,7 +92,7 @@ public class WinsHandler : MonoBehaviour
 
     private void CheckIfWin(int count,int payLineNum)
     {
-        Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
+        // Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
         if (count > 2)
         {
             // Debug.Log($"Win on  {prevSymbol}");
@@ -100,7 +100,9 @@ public class WinsHandler : MonoBehaviour
             CheckWinCombo(count);
         }
         else
-            Debug.Log($"Sorry!! No Win -> Count {count}");
+        {
+            // Debug.Log($"Sorry!! No Win -> Count {count}");
+        }
         
     }
 
@@ -146,13 +148,25 @@ public class WinsHandler : MonoBehaviour
             var index = paylinesInfo._payLines[payLine].paylinePoints;
             for (int i = 0; i < index.Count; i++)
             {
-                Debug.Log($"Points - {index[i]} -> PayLine {payLine}");
+                // Debug.Log($"Points - {index[i]} -> PayLine {payLine}");
+                var currReel = reelPanel._allReels[i];
+                
+                var slotIndex = currReel.GetCorrectSlot(index[i]); // reelNo. , position of slot
+                currReel.HighlightSlot(slotIndex);
             }
             yield return new WaitForSeconds(2f);
+            RemoveHighlight();
         }
 
-        payLineWins.Clear();
+        // payLineWins.Clear();
+        HighlightPayLines();
         yield return null;
+    }
+
+    private void RemoveHighlight()
+    {
+        foreach (var reel in reelPanel._allReels)
+            reel.RemoveHighlight();
     }
 
     #endregion

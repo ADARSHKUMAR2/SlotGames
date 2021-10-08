@@ -188,16 +188,16 @@ public class Reel : MonoBehaviour, IReel
 
     #endregion
 
-    public int GetCorrectSlot(int paylinePoint)
+    public int GetCorrectSlot(int payLinePoint)
     {
         // Debug.Log($"Payline points - {paylinePoint}");
         var index = 0;
-        if (paylinePoint == 0)
+        if (payLinePoint == 0)
         {
             // Debug.Log($"Case 1 {topSymbolIndex}");
             index = (topSymbolIndex) % reelStrip.Count;
         }
-        else if (paylinePoint == 1)
+        else if (payLinePoint == 1)
         {
             // Debug.Log($"Case 2 {topSymbolIndex}");
             index = (topSymbolIndex + 1) % reelStrip.Count;
@@ -210,5 +210,18 @@ public class Reel : MonoBehaviour, IReel
 
         // Debug.Log($"<color=magenta>  reel - {_reelNumber} , Index - {index} </color>");
         return index;
+    }
+
+    public void HighlightSlot(int index)
+    {
+        foreach (var slot in _slots)
+            if(slot.index == index)
+                slot.ShowHighlight(true);
+    }
+
+    public void RemoveHighlight()
+    {
+        foreach (var slot in _slots)
+            slot.ShowHighlight(false);
     }
 }

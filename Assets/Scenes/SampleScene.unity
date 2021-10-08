@@ -3267,7 +3267,7 @@ MonoBehaviour:
   _payLines:
   - paylinePoints: 0100000001000000010000000000000000000000
     winAmount: 10
-  - paylinePoints: 0100000001000000010000000100000001000000
+  - paylinePoints: 0100000001000000000000000100000001000000
     winAmount: 10
   - paylinePoints: 0200000002000000010000000100000001000000
     winAmount: 10
@@ -5048,6 +5048,14 @@ MonoBehaviour:
       - winCombo: 5
         winAmount: 25
     - symbolName: M2
+      symbolWinsList:
+      - winCombo: 3
+        winAmount: 25
+      - winCombo: 4
+        winAmount: 35
+      - winCombo: 5
+        winAmount: 45
+    - symbolName: F1
       symbolWinsList:
       - winCombo: 3
         winAmount: 25

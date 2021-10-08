@@ -178,7 +178,7 @@ MonoBehaviour:
   reelStrip:
   - M3
   - M2
-  - F1
+  - W
   - M1
   - M5
   - F2
@@ -497,9 +497,9 @@ MonoBehaviour:
   - {fileID: 864540988}
   - {fileID: 660443582}
   reelStrip:
-  - F1
+  - W
   - M1
-  - F1
+  - W
   - F2
   - A1
   _symbols: {fileID: 639942847}
@@ -860,10 +860,10 @@ MonoBehaviour:
   reelStrip:
   - M1
   - M2
-  - F1
+  - W
   - F2
   - F2
-  - F1
+  - W
   - M2
   - M1
   - M4
@@ -3002,7 +3002,7 @@ MonoBehaviour:
   - {fileID: 2078034021}
   - {fileID: 1415990461}
   - {fileID: 265453021}
-  stopPositions: 040000000300000004000000020000000a000000
+  stopPositions: 040000000300000003000000020000000a000000
   _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
@@ -6335,7 +6335,7 @@ MonoBehaviour:
   - M5
   - M2
   - M5
-  - F1
+  - W
   - M1
   - F2
   - F3

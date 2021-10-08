@@ -9,7 +9,9 @@ public class PaylineWinData
 {
     //TODO: Make these properties
     public int payLineNum;
+    public string winSymbol;
     public int winAmt;
+    public int winCombo;
 }
 
 public class WinsHandler : MonoBehaviour
@@ -20,6 +22,7 @@ public class WinsHandler : MonoBehaviour
     [SerializeField] private UiController uiController;
     
     private string prevSymbol;
+    private string winSymbol = "";
     private int counter;
     private int totalWinAmt;
 
@@ -49,42 +52,93 @@ public class WinsHandler : MonoBehaviour
 
                 if (CheckWinFromSecondSymbol(j, symbolName, i, payline)) break;
                 
+                // if(symbolName!="W")
                 prevSymbol = symbolName;
 
             } //specific payLine
 
             prevSymbol = "";
+            winSymbol = "";
             
         } // all payLines
         
         HighlightPayLines(); //Highlight the payLines
     }
 
-    private bool CheckWinFromSecondSymbol(int paylinePoint, string symbolName, int currPayline, Payline payline)
+    private bool CheckWinFromSecondSymbol(int paylinePoint, string currSymbolName, int currPayline, Payline payline)
     {
-        if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
+        /*if (paylinePoint == 0 && currSymbolName == "W")
         {
-            if (symbolName == prevSymbol)
-            {
-                // Debug.Log($"Same symbol");
-                counter++;
-            }
-            else
-            {
-                // Debug.Log($"Diff symbol");
-                //TODO: Check for wild here
+            counter++;
+        }*/
 
-                CheckIfWin(counter, currPayline);
-                counter = 0;
-                return true;
-            }
+        if (currPayline == 7)
+        {
+            if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
+            {
+                if (currSymbolName == prevSymbol) // W:Wild
+                {
+                    counter++;
+                    // CheckOnWinComplete(currPayline, payline);
+                    winSymbol = currSymbolName;
+                    Debug.Log($"Same symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter}");
+                }
+                else
+                {
+                    Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
+                    //TODO: Check for wild here
+                
+                    if (prevSymbol == "W")
+                    {
+                        //check if the current symbol is the ongoing win symbol (if not null)
+                        if (winSymbol != "")
+                        {
+                            if (winSymbol == currSymbolName)
+                            {
+                                Debug.Log($"Win symbol same as current symbol");
+                                counter++;
+                                // CheckOnWinComplete(currPayline, payline);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log($"Win symbol is empty");
+                            winSymbol = currSymbolName;
+                            counter++;
+                            // CheckOnWinComplete(currPayline, payline);
+                            return false;
+                        }
+                    }
 
-            //In-case if all symbols lie on payLine
-            if (counter == payline.paylinePoints.Count)
-                CheckIfWin(counter, currPayline);
+                    if (currSymbolName == "W")
+                    {
+                        Debug.Log($"Current symbol is wild");
+                        counter++;
+                        CheckOnWinComplete(currPayline, payline);
+                        return false;
+                    }
+                
+                    CheckIfWin(counter, currPayline,winSymbol);
+                    counter = 0;
+                    return true;
+                }
+
+                //In-case if all symbols lie on payLine
+                CheckOnWinComplete(currPayline, payline);
+            }
         }
-
+        
         return false;
+    }
+
+    private void CheckOnWinComplete(int currPayline, Payline payline)
+    {
+        if (counter == payline.paylinePoints.Count)
+        {
+            // Debug.Log($"All 5 symbols {currSymbolName} for payLine {currPayline} , {payline.paylinePoints.Count}");
+            CheckIfWin(counter, currPayline, winSymbol);
+        }
     }
 
     /// <summary>
@@ -102,16 +156,19 @@ public class WinsHandler : MonoBehaviour
         return slotIndex;
     }
 
-    private void CheckIfWin(int count,int payLineNum)
+    private void CheckIfWin(int count, int payLineNum, string currSymbolName)
     {
-        // Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
+        Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
         if (count > 2)
         {
             // Debug.Log($"Win on  {prevSymbol}");
-            var amt = CheckWinAmount(count);
+            var amt = CheckWinAmount(count,currSymbolName);
+            
             PaylineWinData line = new PaylineWinData();
             line.payLineNum = payLineNum;
             line.winAmt = amt;
+            line.winSymbol = currSymbolName;
+            line.winCombo = count;
             payLineWins.Add(line);
         }
         else
@@ -121,7 +178,7 @@ public class WinsHandler : MonoBehaviour
         
     }
 
-    private int CheckWinAmount(int count)
+    private int CheckWinAmount(int count, string currSymbolName)
     {
         /*if (count == 3)
         {
@@ -137,7 +194,8 @@ public class WinsHandler : MonoBehaviour
         }*/
         
         // Decide which win to give based on payTable data
-        var winAmtGiven = payTable.GetWinAmount(prevSymbol,count);
+        Debug.Log($"Count - {count}");
+        var winAmtGiven = payTable.GetWinAmount(currSymbolName,count);
         totalWinAmt += winAmtGiven;
         Debug.Log($"<color=white> Win - {winAmtGiven} for {prevSymbol} </color>");
         return winAmtGiven;

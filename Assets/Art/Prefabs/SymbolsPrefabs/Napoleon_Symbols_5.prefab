@@ -95,5 +95,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb2709900e3b7343b4e78b0b19df4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _symbolName: F1
-  _symbolId: 5
+  _symbolName: W

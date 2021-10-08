@@ -9,6 +9,9 @@ public class UiController : MonoBehaviour
 {
     [SerializeField] private Button _playButton;
     [SerializeField] private ReelPanel _reelPanel;
+    [SerializeField] private Text winMsgText;
+    [SerializeField] private Text totalWinAmountText;
+    [SerializeField] private WinsHandler winsHandler;
     
     private void OnEnable()
     {
@@ -29,6 +32,7 @@ public class UiController : MonoBehaviour
         var btnText = _playButton.GetComponentInChildren<Text>();
         if (btnText.text.Contains("Start"))
         {
+            ResetUiData();
             _reelPanel.SpinReels();
             btnText.text = "Stop";
         }
@@ -39,6 +43,16 @@ public class UiController : MonoBehaviour
         }
     }
 
+    public void UpdateWinMsg(int winAmt, int payLineNum)
+    {
+        winMsgText.text = $"You won {winAmt} on payLine {payLineNum} ";
+    }
+
+    public void UpdateTotalWinAmt(int winAmt)
+    {
+        totalWinAmountText.text = $"Total Win - {winAmt}";
+    }
+
     private void OnDisable()
     {
         RemoveButtonListeners();
@@ -47,5 +61,12 @@ public class UiController : MonoBehaviour
     private void RemoveButtonListeners()
     {
         _playButton.onClick.RemoveListener(PlayGame);
+    }
+
+    private void ResetUiData()
+    {
+        winMsgText.text = $"";
+        totalWinAmountText.text = $"";
+        winsHandler.ResetData();
     }
 }

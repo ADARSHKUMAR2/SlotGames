@@ -1,20 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SlotGame;
 using UnityEngine;
+
+[Serializable]
+public class PaylineWinData
+{
+    public int payLineNum;
+    public int winAmt;
+}
 
 public class WinsHandler : MonoBehaviour
 {
     [SerializeField] private PaylinesInfo paylinesInfo;
     [SerializeField] private ReelPanel reelPanel;
     [SerializeField] private PaytableData payTable;
+    [SerializeField] private UiController uiController;
     
     private string prevSymbol;
     private int counter;
     private int totalWinAmt;
+
+    private Coroutine winCoroutine;
     
     //Contains the list of all payLines on which the player won
-    public List<int> payLineWins; //TODO:Make it private later after testing
+    public List<PaylineWinData> payLineWins; //TODO:Make it private later after testing
 
     #region LoginWin
 
@@ -96,8 +107,11 @@ public class WinsHandler : MonoBehaviour
         if (count > 2)
         {
             // Debug.Log($"Win on  {prevSymbol}");
-            payLineWins.Add(payLineNum);
-            CheckWinCombo(count);
+            var amt = CheckWinAmount(count);
+            PaylineWinData line = new PaylineWinData();
+            line.payLineNum = payLineNum;
+            line.winAmt = amt;
+            payLineWins.Add(line);
         }
         else
         {
@@ -106,7 +120,7 @@ public class WinsHandler : MonoBehaviour
         
     }
 
-    private void CheckWinCombo(int count)
+    private int CheckWinAmount(int count)
     {
         /*if (count == 3)
         {
@@ -125,7 +139,7 @@ public class WinsHandler : MonoBehaviour
         var winAmtGiven = payTable.GetWinAmount(prevSymbol,count);
         totalWinAmt += winAmtGiven;
         Debug.Log($"<color=white> Win - {winAmtGiven} for {prevSymbol} </color>");
-        
+        return winAmtGiven;
     }
 
     #endregion
@@ -137,7 +151,8 @@ public class WinsHandler : MonoBehaviour
     /// </summary>
     private void HighlightPayLines()
     {
-        StartCoroutine(Highlight());
+        uiController.UpdateTotalWinAmt(totalWinAmt);
+        winCoroutine = StartCoroutine(Highlight());
     }
 
     private IEnumerator Highlight()
@@ -145,14 +160,16 @@ public class WinsHandler : MonoBehaviour
         foreach (var payLine in payLineWins)
         {
             //Highlight the correct slotIndex of the specific reel
-            var index = paylinesInfo._payLines[payLine].paylinePoints;
+            var index = paylinesInfo._payLines[payLine.payLineNum].paylinePoints;
+            
             for (int i = 0; i < index.Count; i++)
             {
                 // Debug.Log($"Points - {index[i]} -> PayLine {payLine}");
                 var currReel = reelPanel._allReels[i];
-                
                 var slotIndex = currReel.GetCorrectSlot(index[i]); // reelNo. , position of slot
+                
                 currReel.HighlightSlot(slotIndex);
+                uiController.UpdateWinMsg(payLine.winAmt,payLine.payLineNum);
             }
             yield return new WaitForSeconds(2f);
             RemoveHighlight();
@@ -170,5 +187,14 @@ public class WinsHandler : MonoBehaviour
     }
 
     #endregion
-    
+
+    public void ResetData()
+    {
+        if(winCoroutine!=null)
+            StopCoroutine(winCoroutine);
+
+        totalWinAmt = 0;
+        RemoveHighlight();
+        payLineWins.Clear();
+    }
 }

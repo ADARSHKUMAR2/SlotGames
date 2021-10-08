@@ -3819,7 +3819,7 @@ MonoBehaviour:
       - winCombo: 4
         winAmount: 40
       - winCombo: 5
-        winAmount: 20
+        winAmount: 25
     - symbolName: M2
       symbolWinsList:
       - winCombo: 3

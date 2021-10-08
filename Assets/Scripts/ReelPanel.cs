@@ -55,7 +55,7 @@ namespace SlotGame
         {
             _uiController.ChanePlayBtnInteraction(true);
             //Calculate winInfo now
-            winsHandler.CalculateWinInfo();
+            winsHandler.CheckWin();
         }
         public void UpdateReelsStoppedCount()
         {

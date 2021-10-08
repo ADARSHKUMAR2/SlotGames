@@ -11,18 +11,7 @@ public class WinsHandler : MonoBehaviour
     
     private string prevSymbol;
     private int counter;
-    
-    public void CalculateWinInfo()
-    {
-        GetSymbolsLocation();
-    }
-
-    private void GetSymbolsLocation()
-    {
-        
-    }
-
-    [ContextMenu("Win")]
+   
     public void CheckWin()
     {
         var allPaylines = paylinesInfo._payLines;
@@ -42,25 +31,7 @@ public class WinsHandler : MonoBehaviour
                 
                 // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");
 
-                if (j > 0) //start from 2nd reel or 2nd payLine position
-                {
-                    if (symbolName == prevSymbol)
-                    {
-                        // Debug.Log($"Same symbol");
-                        counter++;        
-                    }
-                    else
-                    {
-                        // Debug.Log($"Diff symbol");
-                        CheckIfWin(counter,i);
-                        counter = 0;
-                        break;
-                    }
-                    
-                    //In-case if all symbols lie on payLine
-                    if(counter==payline.paylinePoints.Count)
-                        CheckIfWin(counter,i);
-                }
+                if (CheckWinFromSecondSymbol(j, symbolName, i, payline)) break;
                 
                 prevSymbol = symbolName;
 
@@ -70,16 +41,43 @@ public class WinsHandler : MonoBehaviour
         } // all payLines
     }
 
+    private bool CheckWinFromSecondSymbol(int paylinePoint, string symbolName, int currPayline, Payline payline)
+    {
+        if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
+        {
+            if (symbolName == prevSymbol)
+            {
+                // Debug.Log($"Same symbol");
+                counter++;
+            }
+            else
+            {
+                // Debug.Log($"Diff symbol");
+                //TODO: Check for wild here
+
+                CheckIfWin(counter, currPayline);
+                counter = 0;
+                return true;
+            }
+
+            //In-case if all symbols lie on payLine
+            if (counter == payline.paylinePoints.Count)
+                CheckIfWin(counter, currPayline);
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// j=0 -> Top , j=1-> Middle pos; j=2-> Bottom pos
     /// </summary>
     /// <param name="payline"></param>
     /// <param name="j"></param>
     /// <returns></returns>
-    private int GetCorrectSlotIndex(Payline payline, int j)
+    private int GetCorrectSlotIndex(Payline payLine, int j)
     {
         var slotIndex = 0;
-        slotIndex = reelPanel._allReels[j].GetCorrectSlot(payline.paylinePoints[j]); 
+        slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]); 
         
         // Debug.Log($"{slotIndex} - slot index");
         return slotIndex;
@@ -116,6 +114,6 @@ public class WinsHandler : MonoBehaviour
         
         // Decide which win to give based on payTable data
         var winAmtGiven = payTable.GetWinAmount(prevSymbol,count);
-        Debug.Log($"<color=white>Win - {winAmtGiven} for {prevSymbol} </color>");
+        Debug.Log($"<color=white> Win - {winAmtGiven} for {prevSymbol} </color>");
     }
 }

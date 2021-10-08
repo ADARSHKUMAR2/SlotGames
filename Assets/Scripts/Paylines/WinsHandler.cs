@@ -95,7 +95,7 @@ public class WinsHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Sorry!! No Win");
+            Debug.Log($"Sorry!! No Win -> Count {count}");
         }
     }
 
@@ -115,6 +115,7 @@ public class WinsHandler : MonoBehaviour
         }
         
         // Decide which win to give based on payTable data
-        payTable.GetWinAmount(prevSymbol,count);
+        var winAmtGiven = payTable.GetWinAmount(prevSymbol,count);
+        Debug.Log($"<color=white>Win - {winAmtGiven} for {prevSymbol} </color>");
     }
 }

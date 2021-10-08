@@ -28,17 +28,27 @@ public class PaytableData : MonoBehaviour
 {
     [SerializeField] private PayTable payTable;
 
-    public void GetWinAmount(string symbolName, int count)
+    public int GetWinAmount(string symbolName, int count)
     {
         foreach (var allWins in payTable.winsCategory)
         {
             if (allWins.symbolName == symbolName)
             {
+                var maxAmt = 0;
                 foreach (var symbolWins in allWins.symbolWinsList)
                 {
-                    Debug.Log($" Wins for {symbolName} - {symbolWins.winAmount} for {symbolWins.winCombo} of a kind");
+                    if (count >= symbolWins.winCombo)
+                    {
+                        Debug.Log($" Wins for {symbolName} - {symbolWins.winAmount} for {symbolWins.winCombo} of a kind");
+                        if (symbolWins.winAmount > maxAmt)
+                            maxAmt = symbolWins.winAmount;
+
+                    }
                 }
+                return maxAmt;
             }
         }
+
+        return 0;
     }
 }

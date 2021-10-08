@@ -341,9 +341,9 @@ MonoBehaviour:
   - {fileID: 864540988}
   - {fileID: 660443582}
   reelStrip:
-  - M2
+  - F1
   - M1
-  - M2
+  - F1
   - F2
   - A1
   _symbols: {fileID: 639942847}
@@ -2290,7 +2290,7 @@ MonoBehaviour:
   - {fileID: 2078034021}
   - {fileID: 1415990461}
   - {fileID: 265453021}
-  stopPositions: 000000000200000004000000020000000a000000
+  stopPositions: 040000000100000004000000020000000a000000
   _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
@@ -2573,6 +2573,10 @@ MonoBehaviour:
   - paylinePoints: 0100000001000000010000000000000000000000
     winAmount: 10
   - paylinePoints: 0100000001000000010000000100000001000000
+    winAmount: 10
+  - paylinePoints: 0200000002000000010000000100000001000000
+    winAmount: 10
+  - paylinePoints: 0200000002000000010000000000000000000000
     winAmount: 10
 --- !u!1 &1143033679
 GameObject:

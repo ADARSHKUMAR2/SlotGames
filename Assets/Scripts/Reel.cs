@@ -51,7 +51,7 @@ public class Reel : MonoBehaviour, IReel
 
     private void UpdatePosition(int totalSlots)
     {
-        var gap = (totalSlots - 1) / (maxGap * 1f);
+        var gap =   (maxGap * 1f)/(totalSlots - 1);
         for (int i = 0; i < totalSlots; i++)
         {
             var pos = _slots[i].transform.position;

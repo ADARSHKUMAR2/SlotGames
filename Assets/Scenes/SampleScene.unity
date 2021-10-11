@@ -447,7 +447,7 @@ MonoBehaviour:
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 4
+  reelSize: 3
   topSymbolIndex: 1
 --- !u!1001 &100718992
 PrefabInstance:

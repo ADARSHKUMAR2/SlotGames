@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6732661862417917345}
   - component: {fileID: 557285793076684690}
   - component: {fileID: 8481974089989049862}
+  - component: {fileID: 3643251403739292535}
   m_Layer: 0
   m_Name: Napoleon_Symbols_0
   m_TagString: Untagged
@@ -96,4 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _symbolName: M1
-  _symbolId: 0
+--- !u!95 &3643251403739292535
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840969160823572532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

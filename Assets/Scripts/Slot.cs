@@ -13,6 +13,8 @@ public class Slot : MonoBehaviour
     private void Awake()
     {
         _symbolImage = GetComponent<SpriteRenderer>();
+        // GetComponent<Animation>().Stop();
+        GetComponent<Animator>().enabled = false;
         highlightImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         ShowHighlight(false);
     }
@@ -20,7 +22,6 @@ public class Slot : MonoBehaviour
     public void ShowHighlight(bool value)
     {
         highlightImage.enabled = value;
-        // if(value)
         //     Debug.Log($"slot pos - {transform.position} , local -> {transform.localPosition}");
     }
 

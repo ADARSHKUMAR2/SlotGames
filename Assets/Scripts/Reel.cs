@@ -220,19 +220,21 @@ public class Reel : MonoBehaviour, IReel
                 slot.ShowHighlight(true);
                 var reelParent = GetComponentInParent<ReelPanel>();
                 reelParent.UpdateLine(_reelNumber,slot.transform.position);
+                slot.transform.localScale = Vector3.one;
+                slot.GetComponent<Animator>().enabled = true;
                 // Debug.Log($"pos = {slot.transform.position}");
             }
     }
 
     public void RemoveHighlight()
     {
-
         foreach (var slot in _slots)
         {
             slot.ShowHighlight(false);
             var reelParent = GetComponentInParent<ReelPanel>();
             reelParent.UpdateLine(_reelNumber,Vector3.zero);
-            
+            slot.GetComponent<Animator>().enabled = false;
+            slot.transform.localScale = Vector3.one;
         }
     }
 }

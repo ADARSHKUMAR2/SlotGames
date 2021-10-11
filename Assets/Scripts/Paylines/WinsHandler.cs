@@ -67,11 +67,6 @@ public class WinsHandler : MonoBehaviour
 
     private bool CheckWinFromSecondSymbol(int paylinePoint, string currSymbolName, int currPayline, Payline payline)
     {
-        /*if (paylinePoint == 0 && currSymbolName == "W")
-        {
-            counter++;
-        }*/
-
         // if (currPayline == 7)
         // {
             if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
@@ -116,7 +111,6 @@ public class WinsHandler : MonoBehaviour
                     {
                         Debug.Log($"Win symbol same as current symbol");
                         counter++;
-                        // CheckOnWinComplete(currPayline, payline);
                         return false;
                     }
                 }
@@ -125,7 +119,6 @@ public class WinsHandler : MonoBehaviour
                     Debug.Log($"Win symbol is empty");
                     winSymbol = currSymbolName;
                     counter++;
-                    // CheckOnWinComplete(currPayline, payline);
                     return false;
                 }
             }

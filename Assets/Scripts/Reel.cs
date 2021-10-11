@@ -15,6 +15,7 @@ public class Reel : MonoBehaviour, IReel
     [SerializeField] private int _reelNumber;
     [SerializeField] private float _spinSpeed;
     [SerializeField] private float bounceOffset = 1f;
+    [SerializeField] private int reelSize;
     
     private Coroutine _spinCoroutine;
     private int curSlotIndex;
@@ -25,6 +26,19 @@ public class Reel : MonoBehaviour, IReel
     public int topSymbolIndex; // the index of the symbol which at the top position in slot
     private void Start()
     {
+        EnableSlotsAsPerReelSize();
+    }
+
+    private void EnableSlotsAsPerReelSize()
+    {
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            if (i < reelSize)
+            {
+                _slots[i].gameObject.SetActive(true);
+            }
+        }
+        
         InitialiseSlots();
     }
 
@@ -33,10 +47,14 @@ public class Reel : MonoBehaviour, IReel
         var stripLength = reelStrip.Count;
         for (int i = 0; i < _slots.Count; i++)
         {
-            int value = i % stripLength;
-            _slots[i]._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[value]);
-            _slots[i].SetSymbolName(reelStrip[value]);
-            _slots[i].UpdateIndex(i);
+            if (i < reelSize)
+            {
+                Debug.Log($"Total slots - {_slots.Count}");
+                int value = i % stripLength;
+                _slots[i]._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[value]);
+                _slots[i].SetSymbolName(reelStrip[value]);
+                _slots[i].UpdateIndex(i);
+            }
         }
         
     }

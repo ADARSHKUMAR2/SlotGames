@@ -24,6 +24,7 @@ public class Reel : MonoBehaviour, IReel
 
     //TODO: make it a property
     public int topSymbolIndex; // the index of the symbol which at the top position in slot
+    private LineRenderer lineRenderer;
     private void Start()
     {
         EnableSlotsAsPerReelSize();

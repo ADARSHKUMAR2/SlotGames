@@ -32,7 +32,7 @@ namespace SlotGame
                     if(_stopAtSpecificPos)
                         ForceStop(stopPositions,MakeBtnInteractable);
                     else
-                        reel.StopSpin(MakeBtnInteractable); 
+                        reel.StopSpin(MakeBtnInteractable); //error
                 }
             }
         }
@@ -47,10 +47,11 @@ namespace SlotGame
             for (int i = 0; i < stopPositions.Count; i++)
             {
                 _allReels[i].CheckForCustomPos(stopPositions[i], i,btnInteraction);
-                yield return new WaitForSeconds(i); 
+                yield return new WaitForSeconds(i); //TODO: Change it to i
             }
 
         }
+
 
         private void MakeBtnInteractable()
         {

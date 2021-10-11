@@ -21,11 +21,13 @@ public class WinsHandler : MonoBehaviour
     [SerializeField] private PaytableData payTable;
     [SerializeField] private UiController uiController;
     
+    //TODO: Make them local variables
     private string prevSymbol;
     private string winSymbol = "";
     private int counter;
     private int totalWinAmt;
-
+    //
+    
     private Coroutine winCoroutine;
     
     //Contains the list of all payLines on which the player won
@@ -175,16 +177,12 @@ public class WinsHandler : MonoBehaviour
             line.winCombo = count;
             payLineWins.Add(line);
         }
-        else
-        {
-            // Debug.Log($"Sorry!! No Win -> Count {count}");
-        }
         
     }
 
     private int CheckWinAmount(int count, string currSymbolName)
     {
-        Debug.Log($"Count - {count} , {currSymbolName}");
+        // Debug.Log($"Count - {count} , {currSymbolName}");
         var winAmtGiven = payTable.GetWinAmount(currSymbolName,count);
         totalWinAmt += winAmtGiven;
         Debug.Log($"<color=white> Win - {winAmtGiven} for {currSymbolName} </color>");

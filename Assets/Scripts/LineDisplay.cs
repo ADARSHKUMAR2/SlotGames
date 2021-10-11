@@ -14,11 +14,7 @@ public class LineDisplay : MonoBehaviour
 
     public void DrawLine(int index,Vector3 pos)
     {
-        
         lineRenderer.SetPosition(index,pos);
     }
 
-    public void RemoveLine()
-    {
-    }
 }

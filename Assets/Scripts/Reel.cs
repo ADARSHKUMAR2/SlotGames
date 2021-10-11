@@ -87,6 +87,7 @@ public class Reel : MonoBehaviour, IReel
         foreach (var slot in _slots)
         {
             var pos = slot.transform.position;
+            // Mathf.Round(pos.y);
             LeanTween.moveY(slot.gameObject, pos.y + bounceOffset, 0.35f).setEase(LeanTweenType.easeSpring);
         }
 

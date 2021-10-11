@@ -23,12 +23,12 @@ public class Reel : MonoBehaviour, IReel
 
     //TODO: make it a property
     public int topSymbolIndex; // the index of the symbol which at the top position in slot
-    
+    private LineRenderer lineRenderer;
     private void Start()
     {
         InitialiseSlots();
     }
-    
+
     private void InitialiseSlots()
     {
         var stripLength = reelStrip.Count;
@@ -215,13 +215,24 @@ public class Reel : MonoBehaviour, IReel
     public void HighlightSlot(int index)
     {
         foreach (var slot in _slots)
-            if(slot.index == index)
+            if (slot.index == index)
+            {
                 slot.ShowHighlight(true);
+                var reelParent = GetComponentInParent<ReelPanel>();
+                reelParent.UpdateLine(_reelNumber,slot.transform.position);
+                // Debug.Log($"pos = {slot.transform.position}");
+            }
     }
 
     public void RemoveHighlight()
     {
+
         foreach (var slot in _slots)
+        {
             slot.ShowHighlight(false);
+            var reelParent = GetComponentInParent<ReelPanel>();
+            reelParent.UpdateLine(_reelNumber,Vector3.zero);
+            
+        }
     }
 }

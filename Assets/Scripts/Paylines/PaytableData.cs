@@ -32,6 +32,7 @@ public class PaytableData : MonoBehaviour
     {
         foreach (var allWins in payTable.winsCategory)
         {
+            // Debug.Log($"Name - {allWins.symbolName} , {symbolName}");
             if (allWins.symbolName == symbolName)
             {
                 var maxAmt = 0;

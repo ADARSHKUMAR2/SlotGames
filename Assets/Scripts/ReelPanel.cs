@@ -9,6 +9,8 @@ namespace SlotGame
     {
         [SerializeField] private UiController _uiController;
         [SerializeField] private WinsHandler winsHandler;
+        [SerializeField] private LineDisplay lineDisplay;
+        
         public List<Reel> _allReels;
         
         public List<int> stopPositions;
@@ -60,6 +62,13 @@ namespace SlotGame
         public void UpdateReelsStoppedCount()
         {
             totalReelsStopped++;
+        }
+
+        public void UpdateLine(int index, Vector3 pos)
+        {
+            lineDisplay.DrawLine(index,pos);
+            // if(index == 4)
+            //     Debug.Log($"pos = {pos} , {index}");
         }
     }
 

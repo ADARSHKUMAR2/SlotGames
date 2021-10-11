@@ -72,8 +72,8 @@ public class WinsHandler : MonoBehaviour
             counter++;
         }*/
 
-        if (currPayline == 7)
-        {
+        // if (currPayline == 7)
+        // {
             if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
             {
                 if (currSymbolName == prevSymbol) // W:Wild
@@ -97,44 +97,49 @@ public class WinsHandler : MonoBehaviour
                 //In-case if all symbols lie on payLine
                 CheckOnWinComplete(currPayline, payline);
             }
-        }
+        // }
         
         return false;
     }
 
     private bool CheckingForWild(string currSymbolName, int currPayline, Payline payline)
     {
-        if (prevSymbol == "W")
-        {
-            //check if the current symbol is the ongoing win symbol (if not null)
-            if (winSymbol != "")
+        // if (currPayline == 6)
+        // {
+         
+            if (prevSymbol == "W")
             {
-                if (winSymbol == currSymbolName)
+                //check if the current symbol is the ongoing win symbol (if not null)
+                if (winSymbol != "")
                 {
-                    Debug.Log($"Win symbol same as current symbol");
+                    if (winSymbol == currSymbolName)
+                    {
+                        Debug.Log($"Win symbol same as current symbol");
+                        counter++;
+                        // CheckOnWinComplete(currPayline, payline);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.Log($"Win symbol is empty");
+                    winSymbol = currSymbolName;
                     counter++;
                     // CheckOnWinComplete(currPayline, payline);
                     return false;
                 }
             }
-            else
+
+            if (currSymbolName == "W")
             {
-                Debug.Log($"Win symbol is empty");
-                winSymbol = currSymbolName;
+                Debug.Log($"Current symbol is wild");
                 counter++;
-                // CheckOnWinComplete(currPayline, payline);
+                CheckOnWinComplete(currPayline, payline);
                 return false;
             }
-        }
-
-        if (currSymbolName == "W")
-        {
-            Debug.Log($"Current symbol is wild");
-            counter++;
-            CheckOnWinComplete(currPayline, payline);
-            return false;
-        }
-
+   
+        // }
+        
         return true;
     }
 
@@ -186,24 +191,10 @@ public class WinsHandler : MonoBehaviour
 
     private int CheckWinAmount(int count, string currSymbolName)
     {
-        /*if (count == 3)
-        {
-            Debug.Log($"3 of a kind {prevSymbol}");
-        }
-        else if (count == 4)
-        {
-            Debug.Log($"4 of a kind {prevSymbol}");
-        }
-        else if(count == 5)
-        {
-            Debug.Log($"5 of a kind {prevSymbol}");
-        }*/
-        
-        // Decide which win to give based on payTable data
-        Debug.Log($"Count - {count}");
+        Debug.Log($"Count - {count} , {currSymbolName}");
         var winAmtGiven = payTable.GetWinAmount(currSymbolName,count);
         totalWinAmt += winAmtGiven;
-        Debug.Log($"<color=white> Win - {winAmtGiven} for {prevSymbol} </color>");
+        Debug.Log($"<color=white> Win - {winAmtGiven} for {currSymbolName} </color>");
         return winAmtGiven;
     }
 

@@ -20,6 +20,8 @@ public class Slot : MonoBehaviour
     public void ShowHighlight(bool value)
     {
         highlightImage.enabled = value;
+        // if(value)
+        //     Debug.Log($"slot pos - {transform.position} , local -> {transform.localPosition}");
     }
 
     public void UpdateIndex(int value)

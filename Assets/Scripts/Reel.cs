@@ -190,25 +190,16 @@ public class Reel : MonoBehaviour, IReel
 
     public int GetCorrectSlot(int payLinePoint)
     {
-        // Debug.Log($"Payline points - {paylinePoint}");
         var index = 0;
         if (payLinePoint == 0)
-        {
-            // Debug.Log($"Case 1 {topSymbolIndex}");
             index = (topSymbolIndex) % reelStrip.Count;
-        }
+        
         else if (payLinePoint == 1)
-        {
-            // Debug.Log($"Case 2 {topSymbolIndex}");
             index = (topSymbolIndex + 1) % reelStrip.Count;
-        }
+        
         else
-        {
-            // Debug.Log($"Case 3 {topSymbolIndex}");
             index = (topSymbolIndex + 2) % reelStrip.Count;
-        }
 
-        // Debug.Log($"<color=magenta>  reel - {_reelNumber} , Index - {index} </color>");
         return index;
     }
 
@@ -222,7 +213,6 @@ public class Reel : MonoBehaviour, IReel
                 reelParent.UpdateLine(_reelNumber,slot.transform.position);
                 slot.transform.localScale = Vector3.one;
                 slot.GetComponent<Animator>().enabled = true;
-                // Debug.Log($"pos = {slot.transform.position}");
             }
     }
 

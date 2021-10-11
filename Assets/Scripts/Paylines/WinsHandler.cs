@@ -212,6 +212,7 @@ public class WinsHandler : MonoBehaviour
             //Highlight the correct slotIndex of the specific reel
             var index = paylinesInfo._payLines[payLine.payLineNum].paylinePoints;
             
+            yield return new WaitForSeconds(0.5f);
             for (int i = 0; i < index.Count; i++)
             {
                 // Debug.Log($"Points - {index[i]} -> PayLine {payLine}");

@@ -47,7 +47,7 @@ namespace SlotGame
             for (int i = 0; i < stopPositions.Count; i++)
             {
                 _allReels[i].CheckForCustomPos(stopPositions[i], i,btnInteraction);
-                yield return new WaitForSeconds(0f); //TODO: Change it to i
+                yield return new WaitForSeconds(i); //TODO: Change it to i
             }
 
         }
@@ -67,8 +67,6 @@ namespace SlotGame
         public void UpdateLine(int index, Vector3 pos)
         {
             lineDisplay.DrawLine(index,pos);
-            // if(index == 4)
-            //     Debug.Log($"pos = {pos} , {index}");
         }
     }
 

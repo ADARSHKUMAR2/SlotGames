@@ -25,22 +25,41 @@ public class Reel : MonoBehaviour, IReel
     //TODO: make it a property
     public int topSymbolIndex; // the index of the symbol which at the top position in slot
     private LineRenderer lineRenderer;
+    
+    private int startPos = 3;
+    private int endPos = -3;
+    private int maxGap = 6;
+    
     private void Start()
     {
+        //Enable slots as per size entered -> (+2) of i/p
+        // Update positions of slots as per size
         EnableSlotsAsPerReelSize();
     }
 
     private void EnableSlotsAsPerReelSize()
     {
-        for (int i = 0; i < _slots.Count; i++)
-        {
-            if (i < reelSize)
-            {
-                _slots[i].gameObject.SetActive(true);
-            }
+        var totalSlots = reelSize + 2;
+        for (int i = 0; i < totalSlots; i++)
+        { 
+            _slots[i].gameObject.SetActive(true);
         }
         
-        InitialiseSlots();
+        UpdatePosition(totalSlots);
+        
+    }
+
+    private void UpdatePosition(int totalSlots)
+    {
+        var gap = (totalSlots - 1) / (maxGap * 1f);
+        for (int i = 0; i < totalSlots; i++)
+        {
+            var pos = _slots[i].transform.position;
+            pos.y = startPos - (gap*i);
+            _slots[i].transform.position = pos;
+        }
+        
+        // InitialiseSlots();
     }
 
     private void InitialiseSlots()

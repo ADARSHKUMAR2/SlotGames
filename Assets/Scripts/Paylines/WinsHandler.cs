@@ -44,17 +44,13 @@ public class WinsHandler : MonoBehaviour
             counter = 1;
             for (int j = 0; j < payline.paylinePoints.Count; j++) // specific payLine
             {
-                //get the symbol name from specific reel stored at payLine points
-                //get correct slot index
+                //get the symbol name from specific reel stored at payLine points & get correct slot index
                 
                 var slotIndex = GetSlotIndex(payline, j); //payLine and the reel num
                 var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
                 
-                // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");
-
                 if (CheckWinFromSecondSymbol(j, symbolName, i, payline)) break;
                 
-                // if(symbolName!="W")
                 prevSymbol = symbolName;
 
             } //specific payLine
@@ -76,14 +72,12 @@ public class WinsHandler : MonoBehaviour
                 if (currSymbolName == prevSymbol) // W:Wild
                 {
                     counter++;
-                    // CheckOnWinComplete(currPayline, payline);
                     winSymbol = currSymbolName;
                     Debug.Log($"Same symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter}");
                 }
                 else
                 {
                     Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
-                    //TODO: Check for wild here.
                     if (!CheckingForWild(currSymbolName, currPayline, payline)) return false;
 
                     CheckIfWin(counter, currPayline,winSymbol);
@@ -141,10 +135,7 @@ public class WinsHandler : MonoBehaviour
     private void CheckOnWinComplete(int currPayline, Payline payline)
     {
         if (counter == payline.paylinePoints.Count)
-        {
-            // Debug.Log($"All 5 symbols {currSymbolName} for payLine {currPayline} , {payline.paylinePoints.Count}");
             CheckIfWin(counter, currPayline, winSymbol);
-        }
     }
 
     /// <summary>
@@ -156,9 +147,7 @@ public class WinsHandler : MonoBehaviour
     private int GetSlotIndex(Payline payLine, int j)
     {
         var slotIndex = 0;
-        slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]); 
-        
-        // Debug.Log($"{slotIndex} - slot index");
+        slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]);
         return slotIndex;
     }
 
@@ -167,9 +156,7 @@ public class WinsHandler : MonoBehaviour
         Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
         if (count > 2)
         {
-            // Debug.Log($"Win on  {prevSymbol}");
             var amt = CheckWinAmount(count,currSymbolName);
-            
             PaylineWinData line = new PaylineWinData();
             line.payLineNum = payLineNum;
             line.winAmt = amt;
@@ -182,7 +169,6 @@ public class WinsHandler : MonoBehaviour
 
     private int CheckWinAmount(int count, string currSymbolName)
     {
-        // Debug.Log($"Count - {count} , {currSymbolName}");
         var winAmtGiven = payTable.GetWinAmount(currSymbolName,count);
         totalWinAmt += winAmtGiven;
         Debug.Log($"<color=white> Win - {winAmtGiven} for {currSymbolName} </color>");

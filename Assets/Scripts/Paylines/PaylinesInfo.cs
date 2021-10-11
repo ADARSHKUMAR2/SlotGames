@@ -7,7 +7,6 @@ using UnityEngine;
 public class Payline
 {
     public List<int> paylinePoints;
-    // public int winAmount;
 }
 
 public class PaylinesInfo : MonoBehaviour

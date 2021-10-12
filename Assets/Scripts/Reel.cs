@@ -126,21 +126,31 @@ public class Reel : MonoBehaviour, IReel
             var pos = _slots[i].transform.position;
             var finalPos = (Mathf.Round(pos.y * 100f)) / 100.0f;
             LeanTween.moveY(_slots[i].gameObject, finalPos-1f , 0.35f).setEase(LeanTweenType.easeSpring);
-            if(_reelNumber==1)
-                Debug.Log($"final pos- {finalPos}+{gapBetweenSlots} = {finalPos+gapBetweenSlots}");
         }
 
         InvokeBtnEnableAction();
-        GetTopSlotIndex();
+        Invoke(nameof(GetTopSlotIndex),0.35f);
     }
 
     private void GetTopSlotIndex()
     {
-        foreach (var slot in _slots)
+        var totalSlots = reelSize + 2;
+        var pos = 3f;
+        var minDis = 100f;
+
+        for (int i = 0; i < totalSlots; i++)
         {
-            if (Math.Abs(slot.transform.position.y - (0.5f)) < 0.2f)
-                topSymbolIndex = slot.index;
+            if(_slots[i].transform.position.y < pos)
+            {
+                var dis = startPos - _slots[i].transform.position.y ;
+                if (dis < minDis)
+                {
+                    minDis = dis;
+                    topSymbolIndex = _slots[i].index;
+                }
+            }    
         }
+        
     }
 
     private void InvokeBtnEnableAction()
@@ -196,6 +206,7 @@ public class Reel : MonoBehaviour, IReel
                 
                 CancelInvoke();
                 LerpSlots();
+                return;
             }
         }
 

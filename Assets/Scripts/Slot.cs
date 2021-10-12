@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour
     public SpriteRenderer _symbolImage { private set; get; }
     private SpriteRenderer highlightImage;
     
-    private void Awake()
+    private void Start()
     {
         _symbolImage = GetComponent<SpriteRenderer>();
         // GetComponent<Animation>().Stop();

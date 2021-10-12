@@ -41,9 +41,7 @@ public class Reel : MonoBehaviour, IReel
     {
         var totalSlots = reelSize + 2;
         for (int i = 0; i < totalSlots; i++)
-        { 
             _slots[i].gameObject.SetActive(true);
-        }
         
         UpdatePosition(totalSlots);
         
@@ -86,26 +84,27 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator SpinReel()
     {
-        foreach (var slot in _slots)
-            slot.transform.Translate(Vector3.down * 0.1f);
-
-        UpdateSlotPosition();
+        var totalSlots = reelSize + 2;
+        
+        for (int i = 0; i < totalSlots; i++)
+            _slots[i].transform.Translate(Vector3.down * 0.1f);
+        
+        UpdateSlotPosition(totalSlots);
         yield return new WaitForSeconds(0.005f * _spinSpeed);
         _spinCoroutine = StartCoroutine(SpinReel());
     }
 
-    private void UpdateSlotPosition()
+    private void UpdateSlotPosition(int totalSlots)
     {
-        foreach (var slot in _slots)
+        for (int i = 0; i < totalSlots; i++)
         {
-            var pos = slot.transform.position;
-            //To reset position
+            var pos = _slots[i].transform.position;
             if (pos.y < -4.5f)
             {
                 pos.y = 3f; //moves the last slot pos to the top
-                UpdateSlotIndex(slot);
+                UpdateSlotIndex(_slots[i]);
             }
-            slot.transform.position = pos;
+            _slots[i].transform.position = pos;
         }
     }
 
@@ -256,13 +255,14 @@ public class Reel : MonoBehaviour, IReel
 
     public void RemoveHighlight()
     {
-        foreach (var slot in _slots)
+        var totalSlots = reelSize + 2;
+        for (int i = 0; i < totalSlots; i++)
         {
-            slot.ShowHighlight(false);
+            _slots[i].ShowHighlight(false);
             var reelParent = GetComponentInParent<ReelPanel>();
             reelParent.UpdateLine(_reelNumber,Vector3.zero);
-            slot.GetComponent<Animator>().enabled = false;
-            slot.transform.localScale = Vector3.one;
+            _slots[i].GetComponent<Animator>().enabled = false;
+            _slots[i].transform.localScale = Vector3.one;
         }
     }
 }

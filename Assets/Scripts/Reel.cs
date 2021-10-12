@@ -225,11 +225,17 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator CheckStopPos(int stopPosition, int reelNum)
     {
+        var stopPos = 0f;
+        if (reelSize % 2 == 1)
+            stopPos = 0.5f;
+        else
+            stopPos = 1.5f;
+        
         if (_reelNumber == reelNum) // which reel
         {
             for (int i = 0; i < _slots.Count; i++)
             {
-                if (Math.Abs(_slots[i].transform.position.y - (0.5f)) < 0.01f) //means 2nd pos from top
+                if (Math.Abs(_slots[i].transform.position.y - (stopPos)) < 0.01f) //means 2nd pos from top
                 {
                     if (_slots[i].index == stopPosition % reelStrip.Count) //slotPos == stopPos
                     {
@@ -255,16 +261,24 @@ public class Reel : MonoBehaviour, IReel
 
     public int GetCorrectSlot(int payLinePoint)
     {
+        //also check for reel size 
         var index = 0;
+
+        /*
         if (payLinePoint == 0)
             index = (topSymbolIndex) % reelStrip.Count;
         
         else if (payLinePoint == 1)
             index = (topSymbolIndex + 1) % reelStrip.Count;
         
-        else
+        else if(payLinePoint == 2)
             index = (topSymbolIndex + 2) % reelStrip.Count;
+            */
 
+        if (payLinePoint > reelSize)
+            return -1;
+        
+        index = (topSymbolIndex + payLinePoint) % reelStrip.Count;
         return index;
     }
 

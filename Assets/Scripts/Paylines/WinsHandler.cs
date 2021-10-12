@@ -48,6 +48,9 @@ public class WinsHandler : MonoBehaviour
                 //get correct slot index
                 
                 var slotIndex = GetSlotIndex(payline, j); //payLine and the reel num
+                
+                if(slotIndex == -1) break;
+                
                 var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
                 
                 // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");

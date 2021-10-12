@@ -192,7 +192,7 @@ MonoBehaviour:
   _reelNumber: 1
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 1
+  reelSize: 2
   topSymbolIndex: 1
 --- !u!1001 &49211653
 PrefabInstance:
@@ -452,7 +452,7 @@ MonoBehaviour:
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 5
+  reelSize: 1
   topSymbolIndex: 1
 --- !u!1001 &100718992
 PrefabInstance:
@@ -759,7 +759,7 @@ MonoBehaviour:
   _reelNumber: 4
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 3
+  reelSize: 1
   topSymbolIndex: 1
 --- !u!1 &348651626
 GameObject:
@@ -2311,7 +2311,7 @@ MonoBehaviour:
   - {fileID: 1415990461}
   - {fileID: 265453021}
   stopPositions: 040000000000000003000000020000000a000000
-  _stopAtSpecificPos: 0
+  _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3834,7 +3834,7 @@ MonoBehaviour:
   _reelNumber: 3
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 4
+  reelSize: 2
   topSymbolIndex: 1
 --- !u!1001 &1431657661
 PrefabInstance:
@@ -5672,7 +5672,7 @@ MonoBehaviour:
   _reelNumber: 2
   _spinSpeed: 1
   bounceOffset: 1
-  reelSize: 2
+  reelSize: 3
   topSymbolIndex: 1
 --- !u!1001 &2131605177
 PrefabInstance:

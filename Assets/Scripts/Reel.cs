@@ -15,6 +15,7 @@ public class Reel : MonoBehaviour, IReel
     [SerializeField] private int _reelNumber;
     [SerializeField] private float _spinSpeed;
     [SerializeField] private float bounceOffset = 1f;
+    [Range(1,5)]
     [SerializeField] private int reelSize;
     
     private Coroutine _spinCoroutine;
@@ -29,6 +30,7 @@ public class Reel : MonoBehaviour, IReel
     private int startPos = 3;
     private int endPos = -3;
     private int maxGap = 6;
+    private float gapBetweenSlots;
     
     private void Start()
     {
@@ -49,30 +51,26 @@ public class Reel : MonoBehaviour, IReel
 
     private void UpdatePosition(int totalSlots)
     {
-        var gap =   (maxGap * 1f)/(totalSlots - 1);
+        gapBetweenSlots =   (maxGap * 1f)/(totalSlots - 1);
         for (int i = 0; i < totalSlots; i++)
         {
             var pos = _slots[i].transform.position;
-            pos.y = startPos - (gap*i);
+            pos.y = startPos - (gapBetweenSlots*i);
             _slots[i].transform.position = pos;
         }
         
-        // InitialiseSlots();
+        InitialiseSlots(totalSlots);
     }
 
-    private void InitialiseSlots()
+    private void InitialiseSlots(int totalSlots)
     {
         var stripLength = reelStrip.Count;
-        for (int i = 0; i < _slots.Count; i++)
+        for (int i = 0; i < totalSlots; i++)
         {
-            if (i < reelSize)
-            {
-                Debug.Log($"Total slots - {_slots.Count}");
-                int value = i % stripLength;
-                _slots[i]._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[value]);
-                _slots[i].SetSymbolName(reelStrip[value]);
-                _slots[i].UpdateIndex(i);
-            }
+            int value = i % stripLength;
+            _slots[i]._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[value]);
+            _slots[i].SetSymbolName(reelStrip[value]);
+            _slots[i].UpdateIndex(i);
         }
         
     }
@@ -99,9 +97,9 @@ public class Reel : MonoBehaviour, IReel
         for (int i = 0; i < totalSlots; i++)
         {
             var pos = _slots[i].transform.position;
-            if (pos.y < -4.5f)
+            if (pos.y <  endPos - gapBetweenSlots)
             {
-                pos.y = 3f; //moves the last slot pos to the top
+                pos.y = startPos; //moves the last slot pos to the top
                 UpdateSlotIndex(_slots[i]);
             }
             _slots[i].transform.position = pos;
@@ -120,11 +118,16 @@ public class Reel : MonoBehaviour, IReel
 
     private void LerpSlots()
     {
-        foreach (var slot in _slots)
+        // Debug.Log($"Gap on {_reelNumber} - {gapBetweenSlots}");
+        
+        var totalSlots = reelSize + 2;
+        for (int i = 0; i < totalSlots; i++)
         {
-            var pos = slot.transform.position;
-            var res = (Mathf.Round(pos.y * 100f)) / 100.0f;
-            LeanTween.moveY(slot.gameObject, res + bounceOffset, 0.35f).setEase(LeanTweenType.easeSpring);
+            var pos = _slots[i].transform.position;
+            var finalPos = (Mathf.Round(pos.y * 100f)) / 100.0f;
+            LeanTween.moveY(_slots[i].gameObject, finalPos-1f , 0.35f).setEase(LeanTweenType.easeSpring);
+            if(_reelNumber==1)
+                Debug.Log($"final pos- {finalPos}+{gapBetweenSlots} = {finalPos+gapBetweenSlots}");
         }
 
         InvokeBtnEnableAction();
@@ -170,9 +173,23 @@ public class Reel : MonoBehaviour, IReel
 
     private void StopRandomly()
     {
+        var centrePos = (startPos + endPos) / 2f;
+        var centreSlot = (reelSize + 2) / 2;
+        var pausePos = 0f;
+        
+        if (reelSize % 2 == 1) //odd
+            pausePos = centrePos;
+        else
+        {
+            pausePos = startPos - gapBetweenSlots;
+            centreSlot -= 1;
+        }
+
+        pausePos += 1f;
+        
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (Math.Abs(_slots[i].transform.position.y - (-1f)) < 0.0001f)
+            if (Math.Abs(_slots[centreSlot].transform.position.y - (pausePos)) < 0.0001f) // - (-1f)
             {
                 if (_spinCoroutine != null)
                     StopCoroutine(_spinCoroutine);

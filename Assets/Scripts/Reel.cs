@@ -226,10 +226,17 @@ public class Reel : MonoBehaviour, IReel
     private IEnumerator CheckStopPos(int stopPosition, int reelNum)
     {
         var stopPos = 0f;
-        if (reelSize % 2 == 1)
+        /*if (reelSize % 2 == 1)
             stopPos = 0.5f;
         else
+            stopPos = 1.5f;*/
+
+        if (reelSize == 1)
+            stopPos = 0.5f;
+        else if (reelSize == 2)
             stopPos = 1.5f;
+        else if (reelSize == 3)
+            stopPos = 2.5f;
         
         if (_reelNumber == reelNum) // which reel
         {
@@ -275,8 +282,11 @@ public class Reel : MonoBehaviour, IReel
             index = (topSymbolIndex + 2) % reelStrip.Count;
             */
 
-        if (payLinePoint > reelSize)
+        if (payLinePoint > reelSize-1)
+        {
+            Debug.Log($"Reel num - {_reelNumber}");
             return -1;
+        }
         
         index = (topSymbolIndex + payLinePoint) % reelStrip.Count;
         return index;

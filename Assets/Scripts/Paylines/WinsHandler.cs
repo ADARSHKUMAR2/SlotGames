@@ -48,7 +48,7 @@ public class WinsHandler : MonoBehaviour
                 //get correct slot index
                 
                 var slotIndex = GetSlotIndex(payline, j); //payLine and the reel num
-                
+                Debug.Log($"Slot index - {slotIndex}");
                 if(slotIndex == -1) break;
                 
                 var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
@@ -79,14 +79,12 @@ public class WinsHandler : MonoBehaviour
                 if (currSymbolName == prevSymbol) // W:Wild
                 {
                     counter++;
-                    // CheckOnWinComplete(currPayline, payline);
                     winSymbol = currSymbolName;
                     Debug.Log($"Same symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter}");
                 }
                 else
                 {
                     Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
-                    //TODO: Check for wild here.
                     if (!CheckingForWild(currSymbolName, currPayline, payline)) return false;
 
                     CheckIfWin(counter, currPayline,winSymbol);
@@ -220,6 +218,7 @@ public class WinsHandler : MonoBehaviour
                 var currReel = reelPanel._allReels[i];
                 var slotIndex = currReel.GetCorrectSlot(index[i]); // reelNo. , position of slot
                 
+                Debug.Log($"Reel -> {currReel} , {slotIndex}");
                 currReel.HighlightSlot(slotIndex);
                 uiController.UpdateWinMsg(payLine.winAmt,payLine.payLineNum);
             }

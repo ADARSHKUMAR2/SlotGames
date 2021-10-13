@@ -192,7 +192,8 @@ MonoBehaviour:
   _reelNumber: 1
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 2
+  reelSize: 3
+  _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &49211653
 PrefabInstance:
@@ -452,7 +453,8 @@ MonoBehaviour:
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 1
+  reelSize: 3
+  _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &100718992
 PrefabInstance:
@@ -759,7 +761,8 @@ MonoBehaviour:
   _reelNumber: 4
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 1
+  reelSize: 3
+  _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1 &348651626
 GameObject:
@@ -3834,7 +3837,8 @@ MonoBehaviour:
   _reelNumber: 3
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 2
+  reelSize: 3
+  _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &1431657661
 PrefabInstance:
@@ -5673,6 +5677,7 @@ MonoBehaviour:
   _spinSpeed: 1
   bounceOffset: 0.7
   reelSize: 3
+  _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &2131605177
 PrefabInstance:

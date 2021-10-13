@@ -17,6 +17,8 @@ public class Reel : MonoBehaviour, IReel
     [SerializeField] private float bounceOffset = 3f;
     [Range(1,5)]
     [SerializeField] private int reelSize;
+
+    [SerializeField] private ReelPanel _reelPanel;
     
     private Coroutine _spinCoroutine;
     private int curSlotIndex;
@@ -155,11 +157,10 @@ public class Reel : MonoBehaviour, IReel
 
     private void InvokeBtnEnableAction()
     {
-        var reelParent = GetComponentInParent<ReelPanel>();
-        reelParent.UpdateReelsStoppedCount();
+        _reelPanel.UpdateReelsStoppedCount();
         
         var count = 5;
-        if (reelParent.totalReelsStopped==count)
+        if (_reelPanel.totalReelsStopped==count)
         {
             onBtnInteractionChange?.Invoke();
             onBtnInteractionChange = null;
@@ -177,14 +178,14 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator SequentialStop()
     {
-        yield return new WaitForSeconds(_reelNumber * 0.5f);
+        yield return new WaitForSeconds(_reelNumber * 0.3f);
         InvokeRepeating(nameof(StopRandomly), 0.5f, 0.001f);
     }
 
     private void StopRandomly()
     {
         var centrePos = (startPos + endPos) / 2f;
-        var centreSlot = (reelSize + 2) / 2;
+        // var centreSlot = (reelSize + 2) / 2;
         var pausePos = 0f;
         
         if (reelSize % 2 == 1) //odd
@@ -192,14 +193,14 @@ public class Reel : MonoBehaviour, IReel
         else
         {
             pausePos = startPos - gapBetweenSlots;
-            centreSlot -= 1;
+            // centreSlot -= 1;
         }
 
         pausePos -= bounceOffset;
         
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (Math.Abs(_slots[centreSlot].transform.position.y - (pausePos)) < 0.0001f) 
+            if (Math.Abs(_slots[i].transform.position.y - (pausePos)) < 0.0001f) 
             {
                 if (_spinCoroutine != null)
                     StopCoroutine(_spinCoroutine);
@@ -270,10 +271,9 @@ public class Reel : MonoBehaviour, IReel
             if (_slots[i].index == index)
             {
                 _slots[i].ShowHighlight(true);
-                var reelParent = GetComponentInParent<ReelPanel>();
-                reelParent.UpdateLine(_reelNumber,_slots[i].transform.position);
+                _reelPanel.UpdateLine(_reelNumber,_slots[i].transform.position);
                 _slots[i].transform.localScale = Vector3.one;
-                _slots[i].GetComponent<Animator>().enabled = true;
+                _slots[i].PlayAnimation(true);
             }
         }
     }
@@ -284,9 +284,8 @@ public class Reel : MonoBehaviour, IReel
         for (int i = 0; i < totalSlots; i++)
         {
             _slots[i].ShowHighlight(false);
-            var reelParent = GetComponentInParent<ReelPanel>();
-            reelParent.UpdateLine(_reelNumber,Vector3.zero);
-            _slots[i].GetComponent<Animator>().enabled = false;
+            _reelPanel.UpdateLine(_reelNumber,Vector3.zero);
+            _slots[i].PlayAnimation(false);
             _slots[i].transform.localScale = Vector3.one;
         }
     }

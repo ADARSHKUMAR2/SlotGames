@@ -172,7 +172,6 @@ public class WinsHandler : MonoBehaviour
         Debug.Log($"Checking win - {prevSymbol} - {count} on payLine {payLineNum}");
         if (count > 2)
         {
-            // Debug.Log($"Win on  {prevSymbol}");
             var amt = CheckWinAmount(count, currSymbolName);
 
             PaylineWinData line = new PaylineWinData();

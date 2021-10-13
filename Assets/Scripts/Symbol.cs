@@ -9,13 +9,21 @@ public class Symbol : MonoBehaviour
 
     public SpriteRenderer _symbolImage { private set; get; }
     private SpriteRenderer highlightImage;
-    
+    private Animator anim;
+
     private void Awake()
     {
         _symbolImage = GetComponent<SpriteRenderer>();
-        GetComponent<Animator>().enabled = false;
+        anim = GetComponent<Animator>();
+        PlayAnimation(false);
         highlightImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         ShowHighlight(false);
+    }
+
+    public void PlayAnimation(bool value)
+    {
+        anim.enabled = value;
+        anim.Rebind();
     }
 
     public void ShowHighlight(bool value)

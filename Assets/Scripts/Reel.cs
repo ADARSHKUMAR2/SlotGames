@@ -294,15 +294,17 @@ public class Reel : MonoBehaviour, IReel
 
     public void HighlightSlot(int index)
     {
-        foreach (var slot in _slots)
-            if (slot.index == index)
+        for (int i = 0; i < reelSize+2; i++)
+        {
+            if (_slots[i].index == index)
             {
-                slot.ShowHighlight(true);
+                _slots[i].ShowHighlight(true);
                 var reelParent = GetComponentInParent<ReelPanel>();
-                reelParent.UpdateLine(_reelNumber,slot.transform.position);
-                slot.transform.localScale = Vector3.one;
-                slot.GetComponent<Animator>().enabled = true;
+                reelParent.UpdateLine(_reelNumber,_slots[i].transform.position);
+                _slots[i].transform.localScale = Vector3.one;
+                _slots[i].GetComponent<Animator>().enabled = true;
             }
+        }
     }
 
     public void RemoveHighlight()

@@ -11,34 +11,25 @@ public class Reel : MonoBehaviour, IReel
     [Header("Enter SymbolNames")]
     public List<string> reelStrip;
     [SerializeField] private SymbolsData symbolsData;
-
     [SerializeField] private int _reelNumber;
     [SerializeField] private float _spinSpeed;
     [SerializeField] private float bounceOffset = 3f;
-    [Range(1,5)]
-    [SerializeField] private int reelSize;
-
+    [Range(1,4)] [SerializeField] private int reelSize;
     [SerializeField] private ReelPanel _reelPanel;
     
     private Coroutine _spinCoroutine;
     private int curSlotIndex;
     private Action onBtnInteractionChange;
     private bool isReelStopped;
-
-    //TODO: make it a property
-    public int topSymbolIndex; // the index of the symbol which at the top position in slot
-    private LineRenderer lineRenderer;
-    
+    public int topSymbolIndex { private set; get; } // the index of the symbol which at the top position in slot
+    //Reel data
     private int startPos = 3;
     private int endPos = -3;
-    private int maxGap = 6;
     private float gapBetweenSlots;
     
     private void Start()
     {
-        //Enable slots as per size entered -> (+2) of i/p
-        // Update positions of slots as per size
-        EnableSlotsAsPerReelSize();
+        EnableSlotsAsPerReelSize();//Enable slots as per size entered -> (+2) of i/p & Update positions of slots as per size
     }
 
     private void EnableSlotsAsPerReelSize()
@@ -46,13 +37,12 @@ public class Reel : MonoBehaviour, IReel
         var totalSlots = reelSize + 2;
         for (int i = 0; i < totalSlots; i++)
             _slots[i].gameObject.SetActive(true);
-        
         UpdatePosition(totalSlots);
-        
     }
 
     private void UpdatePosition(int totalSlots)
     {
+        var maxGap = startPos - endPos;
         gapBetweenSlots =   (maxGap * 1f)/(totalSlots - 1);
         for (int i = 0; i < totalSlots; i++)
         {
@@ -60,7 +50,6 @@ public class Reel : MonoBehaviour, IReel
             pos.y = startPos - (gapBetweenSlots*i);
             _slots[i].transform.position = pos;
         }
-        
         InitialiseSlots(totalSlots);
     }
 
@@ -74,7 +63,6 @@ public class Reel : MonoBehaviour, IReel
             _slots[i].SetSymbolName(reelStrip[value]);
             _slots[i].UpdateIndex(i);
         }
-        
     }
 
     public void StartSpin()
@@ -85,10 +73,8 @@ public class Reel : MonoBehaviour, IReel
     private IEnumerator SpinReel()
     {
         var totalSlots = reelSize + 2;
-        
         for (int i = 0; i < totalSlots; i++)
             _slots[i].transform.Translate(Vector3.down * 0.1f);
-        
         UpdateSlotPosition(totalSlots);
         yield return new WaitForSeconds(0.005f * _spinSpeed);
         _spinCoroutine = StartCoroutine(SpinReel());
@@ -121,7 +107,6 @@ public class Reel : MonoBehaviour, IReel
     private void LerpSlots()
     {
         // Debug.Log($"Gap on {_reelNumber} - {gapBetweenSlots}");
-        
         var totalSlots = reelSize + 2;
         for (int i = 0; i < totalSlots; i++)
         {
@@ -129,7 +114,6 @@ public class Reel : MonoBehaviour, IReel
             var finalPos = (Mathf.Round(pos.y * 100f)) / 100.0f;
             LeanTween.moveY(_slots[i].gameObject, finalPos+bounceOffset , 0.35f).setEase(LeanTweenType.easeSpring);
         }
-
         InvokeBtnEnableAction();
         Invoke(nameof(GetTopSlotIndex),0.35f);
     }
@@ -139,7 +123,6 @@ public class Reel : MonoBehaviour, IReel
         var totalSlots = reelSize + 2;
         var pos = 3f;
         var minDis = 100f;
-
         for (int i = 0; i < totalSlots; i++)
         {
             if(_slots[i].transform.position.y < pos)
@@ -152,20 +135,16 @@ public class Reel : MonoBehaviour, IReel
                 }
             }    
         }
-        
     }
 
     private void InvokeBtnEnableAction()
     {
         _reelPanel.UpdateReelsStoppedCount();
-        
-        var count = 5;
-        if (_reelPanel.totalReelsStopped==count)
+        if (_reelPanel.totalReelsStopped==_reelPanel._allReels.Count)
         {
             onBtnInteractionChange?.Invoke();
             onBtnInteractionChange = null;
-        }   
-        
+        }
     }
     
     #region RandomStop
@@ -187,7 +166,6 @@ public class Reel : MonoBehaviour, IReel
         var centrePos = (startPos + endPos) / 2f;
         // var centreSlot = (reelSize + 2) / 2;
         var pausePos = 0f;
-        
         if (reelSize % 2 == 1) //odd
             pausePos = centrePos;
         else
@@ -195,9 +173,7 @@ public class Reel : MonoBehaviour, IReel
             pausePos = startPos - gapBetweenSlots;
             // centreSlot -= 1;
         }
-
         pausePos -= bounceOffset;
-        
         for (int i = 0; i < _slots.Count; i++)
         {
             if (Math.Abs(_slots[i].transform.position.y - (pausePos)) < 0.0001f) 
@@ -210,7 +186,6 @@ public class Reel : MonoBehaviour, IReel
                 return;
             }
         }
-
     }
 
     #endregion
@@ -228,7 +203,6 @@ public class Reel : MonoBehaviour, IReel
     {
         var stopPos = 0f;
         stopPos = startPos-gapBetweenSlots - bounceOffset;
-        
         if (_reelNumber == reelNum) // which reel
         {
             for (int i = 0; i < reelSize+2; i++)
@@ -259,7 +233,6 @@ public class Reel : MonoBehaviour, IReel
         var index = 0;
         if (payLinePoint > reelSize-1)
             return -1;
-
         index = (topSymbolIndex + payLinePoint) % reelStrip.Count;
         return index;
     }

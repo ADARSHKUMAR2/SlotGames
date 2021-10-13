@@ -192,7 +192,7 @@ MonoBehaviour:
   _reelNumber: 1
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 3
+  reelSize: 4
   _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &49211653
@@ -453,7 +453,7 @@ MonoBehaviour:
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 3
+  reelSize: 4
   _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &100718992
@@ -761,7 +761,7 @@ MonoBehaviour:
   _reelNumber: 4
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 3
+  reelSize: 4
   _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1 &348651626
@@ -3837,7 +3837,7 @@ MonoBehaviour:
   _reelNumber: 3
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 3
+  reelSize: 4
   _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &1431657661
@@ -5676,7 +5676,7 @@ MonoBehaviour:
   _reelNumber: 2
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 3
+  reelSize: 4
   _reelPanel: {fileID: 868153007}
   topSymbolIndex: 1
 --- !u!1001 &2131605177

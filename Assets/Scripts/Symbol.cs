@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class Symbol : MonoBehaviour
 {
-    public int index; //TODO: Make it a property after testing
-    public string symbolName; //TODO: Make it a property after testing
-
+    public int index { private set; get; }
+    public string symbolName{ private set; get; }
     public SpriteRenderer _symbolImage { private set; get; }
     private SpriteRenderer highlightImage;
     private Animator anim;
 
     private void Awake()
     {
+        GetRequiredComponents();
+        PlayAnimation(false);
+        ShowHighlight(false);
+    }
+
+    private void GetRequiredComponents()
+    {
         _symbolImage = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        PlayAnimation(false);
         highlightImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        ShowHighlight(false);
     }
 
     public void PlayAnimation(bool value)

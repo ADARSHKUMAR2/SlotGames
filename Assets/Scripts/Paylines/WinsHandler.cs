@@ -4,16 +4,6 @@ using System.Collections.Generic;
 using SlotGame;
 using UnityEngine;
 
-[Serializable]
-public class PaylineWinData
-{
-    //TODO: Make these properties
-    public int payLineNum;
-    public string winSymbol;
-    public int winAmt;
-    public int winCombo;
-}
-
 public class WinsHandler : MonoBehaviour
 {
     [SerializeField] private PaylinesInfo paylinesInfo;
@@ -25,17 +15,12 @@ public class WinsHandler : MonoBehaviour
     private string prevSymbol;
     private string winSymbol = "";
     private int counter;
-
     private int totalWinAmt;
-    //
-
     private Coroutine winCoroutine;
-
     //Contains the list of all payLines on which the player won
     public List<PaylineWinData> payLineWins; //TODO:Make it private later after testing
 
     #region LoginWin
-
     public void CheckWin()
     {
         var allPaylines = paylinesInfo._payLines;
@@ -45,34 +30,24 @@ public class WinsHandler : MonoBehaviour
             counter = 1;
             for (int j = 0; j < payline.paylinePoints.Count; j++) // specific payLine
             {
-                //get the symbol name from specific reel stored at payLine points
-                //get correct slot index
-
+                //get the symbol name from specific reel stored at payLine points & get correct slot index
                 var slotIndex = GetSlotIndex(payline, j); //payLine and the reel num
-                // Debug.Log($"Slot index - {slotIndex}");
                 if (slotIndex == -1) break;
 
                 var symbolName = reelPanel._allReels[j].reelStrip[slotIndex];
-
                 // Debug.Log($"Symbol details - Reel -> {j} , reelStrip index - {slotIndex} , {symbolName} , payLine - {payline.paylinePoints[j]}");
-
                 if (CheckWinFromSecondSymbol(j, symbolName, i, payline)) break;
 
-                // if(symbolName!="W")
                 prevSymbol = symbolName;
             } //specific payLine
-
             prevSymbol = "";
             winSymbol = "";
         } // all payLines
-
         HighlightPayLines(); //Highlight the payLines
     }
 
     private bool CheckWinFromSecondSymbol(int paylinePoint, string currSymbolName, int currPayline, Payline payline)
     {
-        // if (currPayline == 7)
-        // {
         if (paylinePoint > 0) //start from 2nd reel or 2nd payLine position
         {
             if (currSymbolName == prevSymbol) // W:Wild
@@ -94,16 +69,11 @@ public class WinsHandler : MonoBehaviour
             //In-case if all symbols lie on payLine
             CheckOnWinComplete(currPayline, payline);
         }
-        // }
-
         return false;
     }
 
     private bool CheckingForWild(string currSymbolName, int currPayline, Payline payline)
     {
-        // if (currPayline == 6)
-        // {
-
         if (prevSymbol == "W")
         {
             //check if the current symbol is the ongoing win symbol (if not null)
@@ -129,7 +99,6 @@ public class WinsHandler : MonoBehaviour
         {
             winSymbol = prevSymbol;
         }
-
         if (currSymbolName == "W")
         {
             Debug.Log($"Current symbol is wild");
@@ -137,9 +106,6 @@ public class WinsHandler : MonoBehaviour
             CheckOnWinComplete(currPayline, payline);
             return false;
         }
-
-        // }
-
         return true;
     }
 
@@ -162,7 +128,6 @@ public class WinsHandler : MonoBehaviour
     {
         var slotIndex = 0;
         slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]);
-
         // Debug.Log($"{slotIndex} - slot index");
         return slotIndex;
     }
@@ -173,7 +138,6 @@ public class WinsHandler : MonoBehaviour
         if (count > 2)
         {
             var amt = CheckWinAmount(count, currSymbolName);
-
             PaylineWinData line = new PaylineWinData();
             line.payLineNum = payLineNum;
             line.winAmt = amt;
@@ -195,7 +159,6 @@ public class WinsHandler : MonoBehaviour
     #endregion
 
     #region Representation
-
     /// <summary>
     /// Representation of payLines
     /// </summary>
@@ -212,7 +175,6 @@ public class WinsHandler : MonoBehaviour
         {
             //Highlight the correct slotIndex of the specific reel
             var index = paylinesInfo._payLines[payLine.payLineNum].paylinePoints;
-
             yield return new WaitForSeconds(0.5f);
             for (int i = 0; i < index.Count; i++)
             {
@@ -224,12 +186,10 @@ public class WinsHandler : MonoBehaviour
                 currReel.HighlightSlot(slotIndex);
                 uiController.UpdateWinMsg(payLine.winAmt, payLine.payLineNum);
             }
-
             yield return new WaitForSeconds(2f);
             RemoveHighlight();
             yield return new WaitForSeconds(2f);
         }
-
         HighlightPayLines();
         yield return null;
     }
@@ -246,7 +206,6 @@ public class WinsHandler : MonoBehaviour
     {
         if (winCoroutine != null)
             StopCoroutine(winCoroutine);
-
         totalWinAmt = 0;
         RemoveHighlight();
         payLineWins.Clear();

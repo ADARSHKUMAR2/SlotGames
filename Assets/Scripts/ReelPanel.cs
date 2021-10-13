@@ -32,7 +32,7 @@ namespace SlotGame
                     if(_stopAtSpecificPos)
                         ForceStop(stopPositions,MakeBtnInteractable);
                     else
-                        reel.StopSpin(MakeBtnInteractable); //error
+                        reel.StopSpin(MakeBtnInteractable); 
                 }
             }
         }

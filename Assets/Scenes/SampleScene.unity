@@ -2314,7 +2314,7 @@ MonoBehaviour:
   - {fileID: 1415990461}
   - {fileID: 265453021}
   stopPositions: 000000000000000000000000020000000a000000
-  _stopAtSpecificPos: 1
+  _stopAtSpecificPos: 0
 --- !u!212 &868153008
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class Reel : MonoBehaviour, IReel
     private Coroutine _spinCoroutine;
     private int curSlotIndex;
     private Action onBtnInteractionChange;
-    private bool isReelStopped;
+    public bool isReelStopped;
     public int topSymbolIndex { private set; get; } // the index of the symbol which at the top position in slot
     //Reel data
     private int startPos = 3;
@@ -34,10 +34,9 @@ public class Reel : MonoBehaviour, IReel
 
     private void EnableSlotsAsPerReelSize()
     {
-        var totalSlots = reelSize + 2;
-        for (int i = 0; i < totalSlots; i++)
+        for (int i = 0; i < reelSize + 2; i++)
             _slots[i].gameObject.SetActive(true);
-        UpdatePosition(totalSlots);
+        UpdatePosition(reelSize + 2);
     }
 
     private void UpdatePosition(int totalSlots)
@@ -72,10 +71,9 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator SpinReel()
     {
-        var totalSlots = reelSize + 2;
-        for (int i = 0; i < totalSlots; i++)
+        for (int i = 0; i < reelSize + 2; i++)
             _slots[i].transform.Translate(Vector3.down * 0.1f);
-        UpdateSlotPosition(totalSlots);
+        UpdateSlotPosition(reelSize + 2);
         yield return new WaitForSeconds(0.005f * _spinSpeed);
         _spinCoroutine = StartCoroutine(SpinReel());
     }
@@ -106,16 +104,13 @@ public class Reel : MonoBehaviour, IReel
 
     private void LerpSlots()
     {
-        // Debug.Log($"Gap on {_reelNumber} - {gapBetweenSlots}");
-        var totalSlots = reelSize + 2;
-        for (int i = 0; i < totalSlots; i++)
+        for (int i = 0; i < reelSize + 2; i++)
         {
             var pos = _slots[i].transform.position;
-            var finalPos = (Mathf.Round(pos.y * 100f)) / 100.0f;
+            var finalPos = (Mathf.Round(pos.y * 10f)) / 10.0f;
             LeanTween.moveY(_slots[i].gameObject, finalPos+bounceOffset , 0.35f).setEase(LeanTweenType.easeSpring);
         }
-        InvokeBtnEnableAction();
-        Invoke(nameof(GetTopSlotIndex),0.35f);
+        Invoke(nameof(GetTopSlotIndex),0.4f);
     }
 
     private void GetTopSlotIndex()
@@ -135,6 +130,7 @@ public class Reel : MonoBehaviour, IReel
                 }
             }    
         }
+        InvokeBtnEnableAction();
     }
 
     private void InvokeBtnEnableAction()
@@ -145,6 +141,12 @@ public class Reel : MonoBehaviour, IReel
             onBtnInteractionChange?.Invoke();
             onBtnInteractionChange = null;
         }
+
+        /*if (_reelPanel._allReels[_reelPanel._allReels.Count - 1].isReelStopped)
+        {
+            onBtnInteractionChange?.Invoke();
+            onBtnInteractionChange = null;   
+        }*/
     }
     
     #region RandomStop
@@ -191,8 +193,7 @@ public class Reel : MonoBehaviour, IReel
     #endregion
 
     #region CustomStop
-
-    public void CheckForCustomPos(int stopPosition, int reelNum,[CanBeNull] Action btnInteraction)
+    public void CheckForCustomPos(int stopPosition,int reelNum,[CanBeNull] Action btnInteraction)
     {
         isReelStopped = false;
         onBtnInteractionChange = btnInteraction;
@@ -202,7 +203,7 @@ public class Reel : MonoBehaviour, IReel
     private IEnumerator CheckStopPos(int stopPosition, int reelNum)
     {
         var stopPos = 0f;
-        stopPos = startPos-gapBetweenSlots - bounceOffset;
+        stopPos = startPos - gapBetweenSlots - bounceOffset;
         if (_reelNumber == reelNum) // which reel
         {
             for (int i = 0; i < reelSize+2; i++)
@@ -215,12 +216,11 @@ public class Reel : MonoBehaviour, IReel
                         StopCoroutine(_spinCoroutine);
                         LerpSlots();
                         isReelStopped = true;
-                        break;
+                        yield return null;
                     }
                 }
             }
         }
-
         yield return new WaitForSeconds(0.0001f);
         if(!isReelStopped)
             StartCoroutine(CheckStopPos(stopPosition, reelNum));
@@ -253,8 +253,7 @@ public class Reel : MonoBehaviour, IReel
 
     public void RemoveHighlight()
     {
-        var totalSlots = reelSize + 2;
-        for (int i = 0; i < totalSlots; i++)
+        for (int i = 0; i < reelSize + 2; i++)
         {
             _slots[i].ShowHighlight(false);
             _reelPanel.UpdateLine(_reelNumber,Vector3.zero);

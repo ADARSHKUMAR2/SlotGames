@@ -5,7 +5,7 @@ using UnityEngine;
 public class Symbol : MonoBehaviour
 {
     public int index { private set; get; }
-    public string symbolName{ private set; get; }
+    private string symbolName;
     public SpriteRenderer _symbolImage { private set; get; }
     private SpriteRenderer highlightImage;
     private Animator anim;

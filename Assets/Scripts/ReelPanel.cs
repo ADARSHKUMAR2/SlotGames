@@ -46,18 +46,16 @@ namespace SlotGame
         {
             for (int i = 0; i < stopPositions.Count; i++)
             {
-                _allReels[i].CheckForCustomPos(stopPositions[i], i,btnInteraction);
-                yield return new WaitForSeconds(i); //TODO: Change it to i
+                _allReels[i].CheckForCustomPos(stopPositions[i], i,btnInteraction); ;
+                yield return new WaitForSeconds(0.75f); 
             }
-
         }
 
 
         private void MakeBtnInteractable()
         {
             _uiController.ChanePlayBtnInteraction(true);
-            //Calculate winInfo now
-            winsHandler.CheckWin();
+            winsHandler.CheckWin();  //Calculate winInfo now
         }
         public void UpdateReelsStoppedCount()
         {

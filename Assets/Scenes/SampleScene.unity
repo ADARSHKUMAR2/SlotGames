@@ -192,9 +192,9 @@ MonoBehaviour:
   _reelNumber: 1
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 4
+  reelSize: 2
   _reelPanel: {fileID: 868153007}
-  topSymbolIndex: 1
+  isReelStopped: 0
 --- !u!1001 &49211653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453,9 +453,9 @@ MonoBehaviour:
   _reelNumber: 0
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 4
+  reelSize: 1
   _reelPanel: {fileID: 868153007}
-  topSymbolIndex: 1
+  isReelStopped: 0
 --- !u!1001 &100718992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -761,9 +761,9 @@ MonoBehaviour:
   _reelNumber: 4
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 4
+  reelSize: 1
   _reelPanel: {fileID: 868153007}
-  topSymbolIndex: 1
+  isReelStopped: 0
 --- !u!1 &348651626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,7 +2314,7 @@ MonoBehaviour:
   - {fileID: 1415990461}
   - {fileID: 265453021}
   stopPositions: 000000000000000000000000020000000a000000
-  _stopAtSpecificPos: 0
+  _stopAtSpecificPos: 1
 --- !u!212 &868153008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3185,7 +3185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _payLines:
-  - paylinePoints: 0000000001000000020000000100000000000000
+  - paylinePoints: 0000000000000000010000000000000000000000
   - paylinePoints: 0000000000000000000000000000000000000000
   - paylinePoints: 0000000001000000010000000100000000000000
   - paylinePoints: 0200000000000000010000000000000000000000
@@ -3837,9 +3837,9 @@ MonoBehaviour:
   _reelNumber: 3
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 4
+  reelSize: 2
   _reelPanel: {fileID: 868153007}
-  topSymbolIndex: 1
+  isReelStopped: 0
 --- !u!1001 &1431657661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5676,9 +5676,9 @@ MonoBehaviour:
   _reelNumber: 2
   _spinSpeed: 1
   bounceOffset: 0.7
-  reelSize: 4
+  reelSize: 3
   _reelPanel: {fileID: 868153007}
-  topSymbolIndex: 1
+  isReelStopped: 0
 --- !u!1001 &2131605177
 PrefabInstance:
   m_ObjectHideFlags: 0

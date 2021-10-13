@@ -14,8 +14,9 @@ public class WinsHandler : MonoBehaviour
     //TODO: Make them local variables
     private string prevSymbol;
     private string winSymbol = "";
-    private int counter;
+    private int symbolStreakCount;
     private int totalWinAmt;
+    
     private Coroutine winCoroutine;
     //Contains the list of all payLines on which the player won
     public List<PaylineWinData> payLineWins; //TODO:Make it private later after testing
@@ -27,7 +28,7 @@ public class WinsHandler : MonoBehaviour
         for (int i = 0; i < allPaylines.Count; i++) //all payLines
         {
             var payline = allPaylines[i];
-            counter = 1;
+            symbolStreakCount = 1;
             for (int j = 0; j < payline.paylinePoints.Count; j++) // specific payLine
             {
                 //get the symbol name from specific reel stored at payLine points & get correct slot index
@@ -52,22 +53,20 @@ public class WinsHandler : MonoBehaviour
         {
             if (currSymbolName == prevSymbol) // W:Wild
             {
-                counter++;
+                symbolStreakCount++;
                 winSymbol = currSymbolName;
-                Debug.Log($"Same symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter}");
+                Debug.Log($"Same symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{symbolStreakCount}");
             }
             else
             {
-                Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{counter} , win {winSymbol}");
+                Debug.Log($"Diff symbol ->Current {currSymbolName} , Prev {prevSymbol} ,{symbolStreakCount} , win {winSymbol}");
                 if (!CheckingForWild(currSymbolName, currPayline, payline)) return false;
 
-                CheckIfWin(counter, currPayline, winSymbol);
-                counter = 0;
+                CheckIfWin(symbolStreakCount, currPayline, winSymbol);
+                symbolStreakCount = 0;
                 return true;
             }
-
-            //In-case if all symbols lie on payLine
-            CheckOnWinComplete(currPayline, payline);
+            CheckOnWinComplete(currPayline, payline); //In-case if all symbols lie on payLine
         }
         return false;
     }
@@ -83,7 +82,7 @@ public class WinsHandler : MonoBehaviour
                 {
                     winSymbol = currSymbolName;
                     Debug.Log($"Win symbol same as current symbol");
-                    counter++;
+                    symbolStreakCount++;
                     return false;
                 }
             }
@@ -91,7 +90,7 @@ public class WinsHandler : MonoBehaviour
             {
                 Debug.Log($"Win symbol is empty");
                 winSymbol = currSymbolName;
-                counter++;
+                symbolStreakCount++;
                 return false;
             }
         }
@@ -102,7 +101,7 @@ public class WinsHandler : MonoBehaviour
         if (currSymbolName == "W")
         {
             Debug.Log($"Current symbol is wild");
-            counter++;
+            symbolStreakCount++;
             CheckOnWinComplete(currPayline, payline);
             return false;
         }
@@ -111,11 +110,8 @@ public class WinsHandler : MonoBehaviour
 
     private void CheckOnWinComplete(int currPayline, Payline payline)
     {
-        if (counter == payline.paylinePoints.Count)
-        {
-            // Debug.Log($"All 5 symbols {currSymbolName} for payLine {currPayline} , {payline.paylinePoints.Count}");
-            CheckIfWin(counter, currPayline, winSymbol);
-        }
+        if (symbolStreakCount == payline.paylinePoints.Count)
+            CheckIfWin(symbolStreakCount, currPayline, winSymbol);
     }
 
     /// <summary>
@@ -128,7 +124,6 @@ public class WinsHandler : MonoBehaviour
     {
         var slotIndex = 0;
         slotIndex = reelPanel._allReels[j].GetCorrectSlot(payLine.paylinePoints[j]);
-        // Debug.Log($"{slotIndex} - slot index");
         return slotIndex;
     }
 
@@ -201,9 +196,9 @@ public class WinsHandler : MonoBehaviour
     }
 
     #endregion
-
     public void ResetData()
     {
+        Debug.Log($"Reset");
         if (winCoroutine != null)
             StopCoroutine(winCoroutine);
         totalWinAmt = 0;

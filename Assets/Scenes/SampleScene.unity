@@ -180,18 +180,18 @@ MonoBehaviour:
   - {fileID: 2014380793}
   - {fileID: 830211381}
   reelStrip:
-  - F2
-  - M2
-  - W
   - M1
+  - W
+  - F2
   - M5
-  - F2
-  - F2
-  - F3
-  _symbols: {fileID: 639942847}
+  - M3
+  - M2
+  - M1
+  - W
+  symbolsData: {fileID: 639942847}
   _reelNumber: 1
   _spinSpeed: 1
-  bounceOffset: 1
+  bounceOffset: 0.7
   reelSize: 2
   topSymbolIndex: 1
 --- !u!1001 &49211653
@@ -443,15 +443,15 @@ MonoBehaviour:
   - {fileID: 692914609}
   - {fileID: 637329962}
   reelStrip:
+  - F2
   - W
   - M1
+  - M4
   - W
-  - F2
-  - A1
-  _symbols: {fileID: 639942847}
+  symbolsData: {fileID: 639942847}
   _reelNumber: 0
   _spinSpeed: 1
-  bounceOffset: 1
+  bounceOffset: 0.7
   reelSize: 1
   topSymbolIndex: 1
 --- !u!1001 &100718992
@@ -755,10 +755,10 @@ MonoBehaviour:
   - M1
   - M4
   - M2
-  _symbols: {fileID: 639942847}
+  symbolsData: {fileID: 639942847}
   _reelNumber: 4
   _spinSpeed: 1
-  bounceOffset: 1
+  bounceOffset: 0.7
   reelSize: 1
   topSymbolIndex: 1
 --- !u!1 &348651626
@@ -3184,7 +3184,7 @@ MonoBehaviour:
   _payLines:
   - paylinePoints: 0000000001000000020000000100000000000000
   - paylinePoints: 0000000000000000000000000000000000000000
-  - paylinePoints: 0200000002000000020000000100000001000000
+  - paylinePoints: 0000000001000000010000000100000000000000
   - paylinePoints: 0200000000000000010000000000000000000000
   - paylinePoints: 0200000002000000020000000000000000000000
   - paylinePoints: 0200000002000000000000000000000000000000
@@ -3830,10 +3830,10 @@ MonoBehaviour:
   - M2
   - M1
   - A1
-  _symbols: {fileID: 639942847}
+  symbolsData: {fileID: 639942847}
   _reelNumber: 3
   _spinSpeed: 1
-  bounceOffset: 1
+  bounceOffset: 0.7
   reelSize: 2
   topSymbolIndex: 1
 --- !u!1001 &1431657661
@@ -5660,18 +5660,18 @@ MonoBehaviour:
   - {fileID: 577213966}
   - {fileID: 1207846790}
   reelStrip:
-  - W
-  - M5
-  - M2
-  - M5
-  - W
+  - F2
+  - F2
+  - F2
+  - F2
+  - F2
   - M1
   - F2
   - F3
-  _symbols: {fileID: 639942847}
+  symbolsData: {fileID: 639942847}
   _reelNumber: 2
   _spinSpeed: 1
-  bounceOffset: 1
+  bounceOffset: 0.7
   reelSize: 3
   topSymbolIndex: 1
 --- !u!1001 &2131605177

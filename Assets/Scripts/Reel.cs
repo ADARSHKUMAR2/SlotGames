@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class Reel : MonoBehaviour, IReel
 {
-    [SerializeField] private  List<Slot> _slots;
+    [SerializeField] private  List<Symbol> _slots;
     [Header("Enter SymbolNames")]
     public List<string> reelStrip;
-    [SerializeField] private Symbols _symbols;
+    [SerializeField] private SymbolsData symbolsData;
 
     [SerializeField] private int _reelNumber;
     [SerializeField] private float _spinSpeed;
@@ -68,7 +68,7 @@ public class Reel : MonoBehaviour, IReel
         for (int i = 0; i < totalSlots; i++)
         {
             int value = i % stripLength;
-            _slots[i]._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[value]);
+            _slots[i]._symbolImage.sprite = symbolsData.SetSymbolImage(reelStrip[value]);
             _slots[i].SetSymbolName(reelStrip[value]);
             _slots[i].UpdateIndex(i);
         }
@@ -106,14 +106,14 @@ public class Reel : MonoBehaviour, IReel
         }
     }
 
-    private void UpdateSlotIndex(Slot slot)
+    private void UpdateSlotIndex(Symbol symbol)
     {
         curSlotIndex--;
         if (curSlotIndex < 0)
             curSlotIndex = reelStrip.Count - 1;
-        slot.UpdateIndex(curSlotIndex);
-        slot._symbolImage.sprite = _symbols.SetSymbolImage(reelStrip[curSlotIndex]);
-        slot.SetSymbolName(reelStrip[curSlotIndex]);
+        symbol.UpdateIndex(curSlotIndex);
+        symbol._symbolImage.sprite = symbolsData.SetSymbolImage(reelStrip[curSlotIndex]);
+        symbol.SetSymbolName(reelStrip[curSlotIndex]);
     }
 
     private void LerpSlots()
@@ -177,7 +177,7 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator SequentialStop()
     {
-        yield return new WaitForSeconds(_reelNumber * 0.3f);
+        yield return new WaitForSeconds(_reelNumber * 0.5f);
         InvokeRepeating(nameof(StopRandomly), 0.5f, 0.001f);
     }
 

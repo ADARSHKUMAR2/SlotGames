@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slot : MonoBehaviour
+public class Symbol : MonoBehaviour
 {
     public int index; //TODO: Make it a property after testing
     public string symbolName; //TODO: Make it a property after testing

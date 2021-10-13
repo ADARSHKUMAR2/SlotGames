@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Symbols : MonoBehaviour
+public class SymbolsData : MonoBehaviour
 {
     [SerializeField] private List<SymbolInfo> _allSymbols;
 

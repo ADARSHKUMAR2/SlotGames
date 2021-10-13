@@ -141,12 +141,6 @@ public class Reel : MonoBehaviour, IReel
             onBtnInteractionChange?.Invoke();
             onBtnInteractionChange = null;
         }
-
-        /*if (_reelPanel._allReels[_reelPanel._allReels.Count - 1].isReelStopped)
-        {
-            onBtnInteractionChange?.Invoke();
-            onBtnInteractionChange = null;   
-        }*/
     }
     
     #region RandomStop

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -30,9 +31,11 @@ public class PaytableData : MonoBehaviour
 
     public int GetWinAmount(string symbolName, int count)
     {
+        var symNames = payTable.winsCategory.OrderByDescending(win => win.symbolName.Equals(symbolName));
+        Debug.Log($"{symNames}");
+        
         foreach (var allWins in payTable.winsCategory)
         {
-            // Debug.Log($"Name - {allWins.symbolName} , {symbolName}");
             if (allWins.symbolName == symbolName)
             {
                 var maxAmt = 0;
@@ -49,7 +52,7 @@ public class PaytableData : MonoBehaviour
                 return maxAmt;
             }
         }
-
+        
         return 0;
     }
 }

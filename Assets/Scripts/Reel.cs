@@ -177,7 +177,7 @@ public class Reel : MonoBehaviour, IReel
 
     private IEnumerator SequentialStop()
     {
-        yield return new WaitForSeconds(_reelNumber * 0.2f);
+        yield return new WaitForSeconds(_reelNumber * 0.3f);
         InvokeRepeating(nameof(StopRandomly), 0.5f, 0.001f);
     }
 
@@ -199,7 +199,7 @@ public class Reel : MonoBehaviour, IReel
         
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (Math.Abs(_slots[centreSlot].transform.position.y - (pausePos)) < 0.0001f) // - (-1f)
+            if (Math.Abs(_slots[centreSlot].transform.position.y - (pausePos)) < 0.0001f) 
             {
                 if (_spinCoroutine != null)
                     StopCoroutine(_spinCoroutine);
@@ -226,35 +226,22 @@ public class Reel : MonoBehaviour, IReel
     private IEnumerator CheckStopPos(int stopPosition, int reelNum)
     {
         var stopPos = 0f;
-        /*if (reelSize % 2 == 1)
-            stopPos = 0.5f;
-        else
-            stopPos = 1.5f;*/
-
-        if (reelSize == 1)
-            stopPos = 0.5f;
-        else if (reelSize == 2)
-            stopPos = 1.5f;
-        else if (reelSize == 3)
-            stopPos = 2.5f;
+        stopPos = startPos-gapBetweenSlots + 1f;
         
         if (_reelNumber == reelNum) // which reel
         {
-            for (int i = 0; i < _slots.Count; i++)
+            for (int i = 0; i < reelSize+2; i++)
             {
-                if (Math.Abs(_slots[i].transform.position.y - (stopPos)) < 0.01f) //means 2nd pos from top
+                if (Math.Abs( _slots[i].transform.position.y - (stopPos)) < 0.001f && _slots[i].index == stopPosition % reelStrip.Count) //means 2nd pos from top && slotPos == stopPos
                 {
-                    if (_slots[i].index == stopPosition % reelStrip.Count) //slotPos == stopPos
+                    if (_spinCoroutine != null)
                     {
-                        if (_spinCoroutine != null)
-                        {
-                            topSymbolIndex = _slots[i].index;
-                            StopCoroutine(_spinCoroutine);
-                            LerpSlots();
-                            isReelStopped = true;
-                        }
+                        topSymbolIndex = _slots[i].index;
+                        StopCoroutine(_spinCoroutine);
+                        LerpSlots();
+                        isReelStopped = true;
+                        break;
                     }
-
                 }
             }
         }
@@ -268,26 +255,10 @@ public class Reel : MonoBehaviour, IReel
 
     public int GetCorrectSlot(int payLinePoint)
     {
-        //also check for reel size 
         var index = 0;
-
-        /*
-        if (payLinePoint == 0)
-            index = (topSymbolIndex) % reelStrip.Count;
-        
-        else if (payLinePoint == 1)
-            index = (topSymbolIndex + 1) % reelStrip.Count;
-        
-        else if(payLinePoint == 2)
-            index = (topSymbolIndex + 2) % reelStrip.Count;
-            */
-
         if (payLinePoint > reelSize-1)
-        {
-            Debug.Log($"Reel num - {_reelNumber}");
             return -1;
-        }
-        
+
         index = (topSymbolIndex + payLinePoint) % reelStrip.Count;
         return index;
     }

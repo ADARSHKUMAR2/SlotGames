@@ -180,7 +180,7 @@ MonoBehaviour:
   - {fileID: 2014380793}
   - {fileID: 830211381}
   reelStrip:
-  - M1
+  - F2
   - M2
   - W
   - M1
@@ -443,7 +443,7 @@ MonoBehaviour:
   - {fileID: 692914609}
   - {fileID: 637329962}
   reelStrip:
-  - M1
+  - F2
   - M1
   - W
   - F2
@@ -5660,7 +5660,7 @@ MonoBehaviour:
   - {fileID: 577213966}
   - {fileID: 1207846790}
   reelStrip:
-  - M1
+  - W
   - M5
   - M2
   - M5

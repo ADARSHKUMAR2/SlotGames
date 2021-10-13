@@ -14,7 +14,7 @@ public class Reel : MonoBehaviour, IReel
 
     [SerializeField] private int _reelNumber;
     [SerializeField] private float _spinSpeed;
-    [SerializeField] private float bounceOffset = 1f;
+    [SerializeField] private float bounceOffset = 3f;
     [Range(1,5)]
     [SerializeField] private int reelSize;
     
@@ -125,7 +125,7 @@ public class Reel : MonoBehaviour, IReel
         {
             var pos = _slots[i].transform.position;
             var finalPos = (Mathf.Round(pos.y * 100f)) / 100.0f;
-            LeanTween.moveY(_slots[i].gameObject, finalPos-1f , 0.35f).setEase(LeanTweenType.easeSpring);
+            LeanTween.moveY(_slots[i].gameObject, finalPos-bounceOffset , 0.35f).setEase(LeanTweenType.easeSpring);
         }
 
         InvokeBtnEnableAction();
@@ -195,7 +195,7 @@ public class Reel : MonoBehaviour, IReel
             centreSlot -= 1;
         }
 
-        pausePos += 1f;
+        pausePos += bounceOffset;
         
         for (int i = 0; i < _slots.Count; i++)
         {
@@ -226,7 +226,7 @@ public class Reel : MonoBehaviour, IReel
     private IEnumerator CheckStopPos(int stopPosition, int reelNum)
     {
         var stopPos = 0f;
-        stopPos = startPos-gapBetweenSlots + 1f;
+        stopPos = startPos-gapBetweenSlots + bounceOffset;
         
         if (_reelNumber == reelNum) // which reel
         {

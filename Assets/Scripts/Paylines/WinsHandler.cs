@@ -214,11 +214,11 @@ public class WinsHandler : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             for (int i = 0; i < index.Count; i++)
             {
-                // Debug.Log($"Points - {index[i]} -> PayLine {payLine}");
+                Debug.Log($"Points - {index[i]} -> PayLine {payLine.payLineNum} , indexes - {i}");
                 var currReel = reelPanel._allReels[i];
                 var slotIndex = currReel.GetCorrectSlot(index[i]); // reelNo. , position of slot
                 
-                Debug.Log($"Reel -> {currReel} , {slotIndex}");
+                Debug.Log($"Reel -> {currReel} -> {i} , {slotIndex}");
                 currReel.HighlightSlot(slotIndex);
                 uiController.UpdateWinMsg(payLine.winAmt,payLine.payLineNum);
             }
